@@ -1,0 +1,581 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7511E228287EF3AF004563DF /* Bitmap_StoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7511E227287EF3AF004563DF /* Bitmap_StoreApp.swift */; };
+		7511E22A287EF3AF004563DF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7511E229287EF3AF004563DF /* ContentView.swift */; };
+		7511E22C287EF3B0004563DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7511E22B287EF3B0004563DF /* Assets.xcassets */; };
+		7511E22F287EF3B0004563DF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7511E22E287EF3B0004563DF /* Preview Assets.xcassets */; };
+		7511E23A287EF3B0004563DF /* Bitmap_StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7511E239287EF3B0004563DF /* Bitmap_StoreTests.swift */; };
+		7511E244287EF3B0004563DF /* Bitmap_StoreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7511E243287EF3B0004563DF /* Bitmap_StoreUITests.swift */; };
+		7511E246287EF3B0004563DF /* Bitmap_StoreUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7511E245287EF3B0004563DF /* Bitmap_StoreUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7511E236287EF3B0004563DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7511E21C287EF3AF004563DF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7511E223287EF3AF004563DF;
+			remoteInfo = "Bitmap Store";
+		};
+		7511E240287EF3B0004563DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7511E21C287EF3AF004563DF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7511E223287EF3AF004563DF;
+			remoteInfo = "Bitmap Store";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7511E224287EF3AF004563DF /* Bitmap Store.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bitmap Store.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7511E227287EF3AF004563DF /* Bitmap_StoreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bitmap_StoreApp.swift; sourceTree = "<group>"; };
+		7511E229287EF3AF004563DF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7511E22B287EF3B0004563DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7511E22E287EF3B0004563DF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7511E230287EF3B0004563DF /* Bitmap_Store.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bitmap_Store.entitlements; sourceTree = "<group>"; };
+		7511E235287EF3B0004563DF /* Bitmap StoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bitmap StoreTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7511E239287EF3B0004563DF /* Bitmap_StoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bitmap_StoreTests.swift; sourceTree = "<group>"; };
+		7511E23F287EF3B0004563DF /* Bitmap StoreUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bitmap StoreUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7511E243287EF3B0004563DF /* Bitmap_StoreUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bitmap_StoreUITests.swift; sourceTree = "<group>"; };
+		7511E245287EF3B0004563DF /* Bitmap_StoreUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bitmap_StoreUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7511E221287EF3AF004563DF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7511E232287EF3B0004563DF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7511E23C287EF3B0004563DF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7511E21B287EF3AF004563DF = {
+			isa = PBXGroup;
+			children = (
+				7511E226287EF3AF004563DF /* Bitmap Store */,
+				7511E238287EF3B0004563DF /* Bitmap StoreTests */,
+				7511E242287EF3B0004563DF /* Bitmap StoreUITests */,
+				7511E225287EF3AF004563DF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7511E225287EF3AF004563DF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7511E224287EF3AF004563DF /* Bitmap Store.app */,
+				7511E235287EF3B0004563DF /* Bitmap StoreTests.xctest */,
+				7511E23F287EF3B0004563DF /* Bitmap StoreUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7511E226287EF3AF004563DF /* Bitmap Store */ = {
+			isa = PBXGroup;
+			children = (
+				7511E227287EF3AF004563DF /* Bitmap_StoreApp.swift */,
+				7511E229287EF3AF004563DF /* ContentView.swift */,
+				7511E22B287EF3B0004563DF /* Assets.xcassets */,
+				7511E230287EF3B0004563DF /* Bitmap_Store.entitlements */,
+				7511E22D287EF3B0004563DF /* Preview Content */,
+			);
+			path = "Bitmap Store";
+			sourceTree = "<group>";
+		};
+		7511E22D287EF3B0004563DF /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				7511E22E287EF3B0004563DF /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		7511E238287EF3B0004563DF /* Bitmap StoreTests */ = {
+			isa = PBXGroup;
+			children = (
+				7511E239287EF3B0004563DF /* Bitmap_StoreTests.swift */,
+			);
+			path = "Bitmap StoreTests";
+			sourceTree = "<group>";
+		};
+		7511E242287EF3B0004563DF /* Bitmap StoreUITests */ = {
+			isa = PBXGroup;
+			children = (
+				7511E243287EF3B0004563DF /* Bitmap_StoreUITests.swift */,
+				7511E245287EF3B0004563DF /* Bitmap_StoreUITestsLaunchTests.swift */,
+			);
+			path = "Bitmap StoreUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7511E223287EF3AF004563DF /* Bitmap Store */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7511E249287EF3B0004563DF /* Build configuration list for PBXNativeTarget "Bitmap Store" */;
+			buildPhases = (
+				7511E220287EF3AF004563DF /* Sources */,
+				7511E221287EF3AF004563DF /* Frameworks */,
+				7511E222287EF3AF004563DF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Bitmap Store";
+			productName = "Bitmap Store";
+			productReference = 7511E224287EF3AF004563DF /* Bitmap Store.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7511E234287EF3B0004563DF /* Bitmap StoreTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7511E24C287EF3B0004563DF /* Build configuration list for PBXNativeTarget "Bitmap StoreTests" */;
+			buildPhases = (
+				7511E231287EF3B0004563DF /* Sources */,
+				7511E232287EF3B0004563DF /* Frameworks */,
+				7511E233287EF3B0004563DF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7511E237287EF3B0004563DF /* PBXTargetDependency */,
+			);
+			name = "Bitmap StoreTests";
+			productName = "Bitmap StoreTests";
+			productReference = 7511E235287EF3B0004563DF /* Bitmap StoreTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		7511E23E287EF3B0004563DF /* Bitmap StoreUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7511E24F287EF3B0004563DF /* Build configuration list for PBXNativeTarget "Bitmap StoreUITests" */;
+			buildPhases = (
+				7511E23B287EF3B0004563DF /* Sources */,
+				7511E23C287EF3B0004563DF /* Frameworks */,
+				7511E23D287EF3B0004563DF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7511E241287EF3B0004563DF /* PBXTargetDependency */,
+			);
+			name = "Bitmap StoreUITests";
+			productName = "Bitmap StoreUITests";
+			productReference = 7511E23F287EF3B0004563DF /* Bitmap StoreUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7511E21C287EF3AF004563DF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1400;
+				LastUpgradeCheck = 1400;
+				TargetAttributes = {
+					7511E223287EF3AF004563DF = {
+						CreatedOnToolsVersion = 14.0;
+					};
+					7511E234287EF3B0004563DF = {
+						CreatedOnToolsVersion = 14.0;
+						TestTargetID = 7511E223287EF3AF004563DF;
+					};
+					7511E23E287EF3B0004563DF = {
+						CreatedOnToolsVersion = 14.0;
+						TestTargetID = 7511E223287EF3AF004563DF;
+					};
+				};
+			};
+			buildConfigurationList = 7511E21F287EF3AF004563DF /* Build configuration list for PBXProject "Bitmap Store" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7511E21B287EF3AF004563DF;
+			productRefGroup = 7511E225287EF3AF004563DF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7511E223287EF3AF004563DF /* Bitmap Store */,
+				7511E234287EF3B0004563DF /* Bitmap StoreTests */,
+				7511E23E287EF3B0004563DF /* Bitmap StoreUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7511E222287EF3AF004563DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7511E22F287EF3B0004563DF /* Preview Assets.xcassets in Resources */,
+				7511E22C287EF3B0004563DF /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7511E233287EF3B0004563DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7511E23D287EF3B0004563DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7511E220287EF3AF004563DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7511E22A287EF3AF004563DF /* ContentView.swift in Sources */,
+				7511E228287EF3AF004563DF /* Bitmap_StoreApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7511E231287EF3B0004563DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7511E23A287EF3B0004563DF /* Bitmap_StoreTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7511E23B287EF3B0004563DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7511E244287EF3B0004563DF /* Bitmap_StoreUITests.swift in Sources */,
+				7511E246287EF3B0004563DF /* Bitmap_StoreUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7511E237287EF3B0004563DF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7511E223287EF3AF004563DF /* Bitmap Store */;
+			targetProxy = 7511E236287EF3B0004563DF /* PBXContainerItemProxy */;
+		};
+		7511E241287EF3B0004563DF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7511E223287EF3AF004563DF /* Bitmap Store */;
+			targetProxy = 7511E240287EF3B0004563DF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		7511E247287EF3B0004563DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		7511E248287EF3B0004563DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		7511E24A287EF3B0004563DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Bitmap Store/Bitmap_Store.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Bitmap Store/Preview Content\"";
+				DEVELOPMENT_TEAM = 6T2Q6AY7MM;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.prodbybitmap.Bitmap-Store";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		7511E24B287EF3B0004563DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Bitmap Store/Bitmap_Store.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Bitmap Store/Preview Content\"";
+				DEVELOPMENT_TEAM = 6T2Q6AY7MM;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.prodbybitmap.Bitmap-Store";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		7511E24D287EF3B0004563DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6T2Q6AY7MM;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.prodbybitmap.Bitmap-StoreTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bitmap Store.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Bitmap Store";
+			};
+			name = Debug;
+		};
+		7511E24E287EF3B0004563DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6T2Q6AY7MM;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.prodbybitmap.Bitmap-StoreTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bitmap Store.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Bitmap Store";
+			};
+			name = Release;
+		};
+		7511E250287EF3B0004563DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6T2Q6AY7MM;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.prodbybitmap.Bitmap-StoreUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Bitmap Store";
+			};
+			name = Debug;
+		};
+		7511E251287EF3B0004563DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6T2Q6AY7MM;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.prodbybitmap.Bitmap-StoreUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Bitmap Store";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7511E21F287EF3AF004563DF /* Build configuration list for PBXProject "Bitmap Store" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7511E247287EF3B0004563DF /* Debug */,
+				7511E248287EF3B0004563DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7511E249287EF3B0004563DF /* Build configuration list for PBXNativeTarget "Bitmap Store" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7511E24A287EF3B0004563DF /* Debug */,
+				7511E24B287EF3B0004563DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7511E24C287EF3B0004563DF /* Build configuration list for PBXNativeTarget "Bitmap StoreTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7511E24D287EF3B0004563DF /* Debug */,
+				7511E24E287EF3B0004563DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7511E24F287EF3B0004563DF /* Build configuration list for PBXNativeTarget "Bitmap StoreUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7511E250287EF3B0004563DF /* Debug */,
+				7511E251287EF3B0004563DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7511E21C287EF3AF004563DF /* Project object */;
+}
