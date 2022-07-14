@@ -11,7 +11,11 @@ import SwiftUI
 struct Bitmap_StoreApp: App {
     var body: some Scene {
         WindowGroup {
+            #if os(macOS)
+            Sidebar()
+            #else
             ContentView()
+            #endif
         }
     }
 }

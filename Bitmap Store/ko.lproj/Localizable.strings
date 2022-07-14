@@ -1,0 +1,25 @@
+/* 
+  Localizable.strings
+  Bitmap Store
+
+  Created by 재혁 on 2022/07/13.
+  
+*/
+
+// Bitmap
+"Bitmap" = "비트맵";
+"Bitmap Store" = "비트맵 스토어";
+
+// Menus
+"Home" = "홈";
+"Newsroom" = "뉴스룸";
+"Blog" = "블로그";
+"Games" = "게임";
+"Settings" = "설정";
+"Accounts" = "계정";
+"About Bitmap Store" = "비트맵 스토어에 관하여";
+"Project Files" = "프로젝트 파일";
+"Other Downloads" = "기타 다운로드";
+
+// Titles
+"Explore" = "탐색";

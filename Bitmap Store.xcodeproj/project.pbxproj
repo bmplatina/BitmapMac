@@ -15,6 +15,8 @@
 		7511E244287EF3B0004563DF /* Bitmap_StoreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7511E243287EF3B0004563DF /* Bitmap_StoreUITests.swift */; };
 		7511E246287EF3B0004563DF /* Bitmap_StoreUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7511E245287EF3B0004563DF /* Bitmap_StoreUITestsLaunchTests.swift */; };
 		7511E254287EFAAD004563DF /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7511E253287EFAAD004563DF /* WebKit.framework */; };
+		7511E257287F0202004563DF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7511E259287F0202004563DF /* Localizable.strings */; };
+		75EDF223287F1BD500B99748 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EDF222287F1BD500B99748 /* Sidebar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7511E224287EF3AF004563DF /* Bitmap Store.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bitmap Store.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7511E224287EF3AF004563DF /* Bitmap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bitmap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7511E227287EF3AF004563DF /* Bitmap_StoreApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bitmap_StoreApp.swift; sourceTree = "<group>"; };
 		7511E229287EF3AF004563DF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7511E22B287EF3B0004563DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -47,6 +49,9 @@
 		7511E243287EF3B0004563DF /* Bitmap_StoreUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bitmap_StoreUITests.swift; sourceTree = "<group>"; };
 		7511E245287EF3B0004563DF /* Bitmap_StoreUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bitmap_StoreUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7511E253287EFAAD004563DF /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		7511E258287F0202004563DF /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		75EDF222287F1BD500B99748 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
+		75EDF228287F3CFE00B99748 /* Bitmap-Store-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Bitmap-Store-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +94,7 @@
 		7511E225287EF3AF004563DF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7511E224287EF3AF004563DF /* Bitmap Store.app */,
+				7511E224287EF3AF004563DF /* Bitmap.app */,
 				7511E235287EF3B0004563DF /* Bitmap StoreTests.xctest */,
 				7511E23F287EF3B0004563DF /* Bitmap StoreUITests.xctest */,
 			);
@@ -99,6 +104,9 @@
 		7511E226287EF3AF004563DF /* Bitmap Store */ = {
 			isa = PBXGroup;
 			children = (
+				75EDF228287F3CFE00B99748 /* Bitmap-Store-Info.plist */,
+				75EDF21D287F168300B99748 /* View */,
+				7511E259287F0202004563DF /* Localizable.strings */,
 				7511E227287EF3AF004563DF /* Bitmap_StoreApp.swift */,
 				7511E229287EF3AF004563DF /* ContentView.swift */,
 				7511E22B287EF3B0004563DF /* Assets.xcassets */,
@@ -141,6 +149,30 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		75EDF21D287F168300B99748 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				75EDF221287F1BA500B99748 /* Menus */,
+				75EDF21E287F175000B99748 /* Settings */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		75EDF21E287F175000B99748 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		75EDF221287F1BA500B99748 /* Menus */ = {
+			isa = PBXGroup;
+			children = (
+				75EDF222287F1BD500B99748 /* Sidebar.swift */,
+			);
+			path = Menus;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -158,7 +190,7 @@
 			);
 			name = "Bitmap Store";
 			productName = "Bitmap Store";
-			productReference = 7511E224287EF3AF004563DF /* Bitmap Store.app */;
+			productReference = 7511E224287EF3AF004563DF /* Bitmap.app */;
 			productType = "com.apple.product-type.application";
 		};
 		7511E234287EF3B0004563DF /* Bitmap StoreTests */ = {
@@ -227,6 +259,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 7511E21B287EF3AF004563DF;
 			productRefGroup = 7511E225287EF3AF004563DF /* Products */;
@@ -246,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7511E22F287EF3B0004563DF /* Preview Assets.xcassets in Resources */,
+				7511E257287F0202004563DF /* Localizable.strings in Resources */,
 				7511E22C287EF3B0004563DF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7511E22A287EF3AF004563DF /* ContentView.swift in Sources */,
+				75EDF223287F1BD500B99748 /* Sidebar.swift in Sources */,
 				7511E228287EF3AF004563DF /* Bitmap_StoreApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -307,6 +342,17 @@
 			targetProxy = 7511E240287EF3B0004563DF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7511E259287F0202004563DF /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7511E258287F0202004563DF /* ko */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		7511E247287EF3B0004563DF /* Debug */ = {
@@ -359,7 +405,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -413,7 +459,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -425,6 +471,7 @@
 		7511E24A287EF3B0004563DF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Bitmap Store/Bitmap_Store.entitlements";
@@ -436,6 +483,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Bitmap-Store-Info.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -443,8 +491,10 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.prodbybitmap.Bitmap-Store";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.prodbybitmap.esd;
+				PRODUCT_NAME = Bitmap;
+				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -453,6 +503,7 @@
 		7511E24B287EF3B0004563DF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Bitmap Store/Bitmap_Store.entitlements";
@@ -464,6 +515,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Bitmap-Store-Info.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -471,8 +523,9 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.prodbybitmap.Bitmap-Store";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.prodbybitmap.esd;
+				PRODUCT_NAME = Bitmap;
+				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};

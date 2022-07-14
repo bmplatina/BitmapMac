@@ -7,89 +7,46 @@
 
 import SwiftUI
 import WebKit
+import Combine
 
+extension String {
+    func localized(comment: String = "") -> String {
+        return NSLocalizedString(self, comment: comment)
+    } // myLabel.text = "Hello".localized()
+    func localized(with argument: CVarArg = [], comment: String = "") -> String {
+            return String(format: self.localized(comment: comment), argument)
+    } // myLabel.text = "My Age %d".localized(with: 26, comment: "age")
+} // https://babbab2.tistory.com/59
 
-struct Option: Hashable {
-    let title: String
-    let imageName: String
-}
+struct WebView: NSViewRepresentable {
+    let url: URL
+
+    func makeNSView(context: NSViewRepresentableContext<WebView>) -> WKWebView {
+        let webView: WKWebView = WKWebView()
+        let request = URLRequest(url: self.url)
+        webView.customUserAgent = "Safari/605"
+        webView.load(request)
+        return webView
+    }
+
+    func updateNSView(_ webView: WKWebView, context: NSViewRepresentableContext<WebView>) {}
+} // https://anpigon.tistory.com/132
 
 struct ContentView: View {
-    @State var currentOption = 0
-    let options: [Option] = [
-        .init(title: "Home", imageName: "house"),
-        .init(title: "Games", imageName: "gamecontroller.fill"),
-        .init(title: "Settings", imageName: "gear"),
-        .init(title: "Accounts", imageName: "person.badge.key"),
-    ]
-    
+    let url: String = "http://prodbybitmap.com"
     var body: some View {
-        /* VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-        } */
-        NavigationView {
-            ListView(
-                currentSelection: $currentOption,
-                options: options
-            )
-            switch currentOption {
-            case 1:
-                Text("About Bitmap Store")
-            default:
-                MainView()
-            }
+        GeometryReader { g in
+            ScrollView {
+                WebView(url: URL(string: url)!)
+                    .frame(height: g.size.height)
+            }.frame(height: g.size.height)
         }
-        .frame(minWidth: 600, minHeight: 400 )
+        .navigationTitle("Bitmap".localized())
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-    }
-}
-
-struct ListView: View {
-    @Binding var currentSelection: Int
-    let options: [Option]
-    var body: some View {
-        VStack() {
-            let current = options[currentSelection]
-            ForEach(options, id: \.self) { option in
-                HStack {
-                    Image(systemName: option.imageName)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 20)
-                    Text(option.title)
-                        .foregroundColor(current == option ? Color.blue: Color.white)
-                    Spacer()
-                }
-                .padding(8)
-                .onTapGesture {
-                    if currentSelection == 1 {
-                        currentSelection = 0
-                    }
-                    else {
-                        self.currentSelection = 1
-                    }
-                }
-            }
-            Spacer()
-        }
-    }
-}
-
-struct MainView: View {
-    var body: some View {
-        VStack {
-            Image("header")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-            
-        }
     }
 }
