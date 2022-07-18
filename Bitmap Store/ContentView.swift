@@ -28,7 +28,6 @@ struct WebView: NSViewRepresentable {
         webView.load(request)
         return webView
     }
-
     func updateNSView(_ webView: WKWebView, context: NSViewRepresentableContext<WebView>) {}
 } // https://anpigon.tistory.com/132
 
@@ -45,8 +44,49 @@ struct ContentView: View {
     }
 }
 
+struct NewsroomView: View {
+    let url: String = "http://prodbybitmap.com/commission/bitmap_notices"
+    var body: some View {
+        GeometryReader { g in
+            ScrollView {
+                WebView(url: URL(string: url)!)
+                    .frame(height: g.size.height)
+            }.frame(height: g.size.height)
+        }
+        .navigationTitle("Newsroom".localized())
+    }
+}
+
+struct BlogView: View {
+    let url: String = "http://prodbybitmap.com/commission/blog"
+    var body: some View {
+        GeometryReader { g in
+            ScrollView {
+                WebView(url: URL(string: url)!)
+                    .frame(height: g.size.height)
+            }.frame(height: g.size.height)
+        }
+        .navigationTitle("Blog".localized())
+    }
+}
+
+struct SettingsView: View {
+    let url: String = "http://prodbybitmap.com/commission/blog"
+    var body: some View {
+        GeometryReader { g in
+            ScrollView {
+                WebView(url: URL(string: url)!)
+                    .frame(height: g.size.height)
+            }.frame(height: g.size.height)
+        }
+        .navigationTitle("Blog".localized())
+    }
+}
+
+#if DEBUG
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
+#endif

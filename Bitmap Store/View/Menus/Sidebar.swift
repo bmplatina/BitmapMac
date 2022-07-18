@@ -20,7 +20,7 @@ struct Sidebar: View {
                     NavigationLink(destination: ContentView()) {
                         Label("Newsroom".localized(), systemImage: "newspaper")
                     }
-                    NavigationLink(destination: ContentView()) {
+                    NavigationLink(destination: BlogView()) {
                         Label("Blog".localized(), systemImage: "message")
                     }
                 }
@@ -28,19 +28,19 @@ struct Sidebar: View {
                 Spacer()
                 Text("Bitmap Store".localized())
                 
-                NavigationLink(destination: ContentView()) {
+                NavigationLink(destination: ProjectFilesView()) {
                     Label("Project Files".localized(), systemImage: "folder")
                 }
-                NavigationLink(destination: ContentView()) {
+                NavigationLink(destination: GameESD_View()) {
                     Label("Games".localized(), systemImage: "gamecontroller")
                 }
-                NavigationLink(destination: ContentView()) {
+                NavigationLink(destination: OtherESD_View()) {
                     Label("Other Downloads".localized(), systemImage: "square.and.arrow.down.on.square")
                 }
                 
                 Spacer()
                 Divider()
-                NavigationLink(destination: ContentView()) {
+                NavigationLink(destination: SettingsView()) {
                     Label("Settings".localized(), systemImage: "gear")
                 }
             }
@@ -56,7 +56,9 @@ struct Sidebar: View {
                     })
                 }
             }
+            #if DEBUG
             ContentView()
+            #endif
         }
     }
 }
