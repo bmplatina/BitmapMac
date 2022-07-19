@@ -23,3 +23,8 @@
 
 // Titles
 "Explore" = "탐색";
+
+// ERROR CODES
+"Bitmap Store couldn't reach to server. Please check your internet connection." = "서버에 접근할 수 없습니다. 인터넷 연결을 확인해주십시오.";
+"Processing of data couldn't complete." = "데이터를 처리할 수 없습니다.";
+"Decoding failed." = "서버 데이터를 디코드하지 못했습니다.";

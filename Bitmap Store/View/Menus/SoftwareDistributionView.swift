@@ -23,9 +23,7 @@ struct ProjectFilesView: View {
 
 struct GameESD_View: View {
     var body: some View {
-        VStack {
-            Text("sex")
-        }
+        Text("sex")
     }
 }
 

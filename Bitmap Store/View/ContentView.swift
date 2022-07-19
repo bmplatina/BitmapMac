@@ -32,15 +32,46 @@ struct WebView: NSViewRepresentable {
 } // https://anpigon.tistory.com/132
 
 struct ContentView: View {
+    @State private var wikiToken: loginToken?
     let url: String = "http://prodbybitmap.com"
+    
     var body: some View {
+        /*
         GeometryReader { g in
             ScrollView {
                 WebView(url: URL(string: url)!)
                     .frame(height: g.size.height)
             }.frame(height: g.size.height)
         }
-        .navigationTitle("Bitmap".localized())
+        .navigationTitle("Bitmap".localized()) */
+        HStack {
+            Spacer()
+            VStack(alignment: .trailing) {
+                Spacer()
+                Text(wikiToken?.csrftoken ?? "")
+                    .font(.title2)
+            }
+        }
+        .onAppear(perform: loadData)
+    }
+    
+    private func loadData() {
+        guard let url = URL(string: "http://prodbybitmap.com/w/api.php?action=query&meta=tokens&format=json")
+        else {
+            return
+        }
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data
+            else {
+                return
+            }
+            if let decodedData = try? JSONDecoder().decode(loginToken.self, from: data) {
+                DispatchQueue.main.async {
+                    self.wikiToken = decodedData
+                }
+            }
+        }
+        .resume()
     }
 }
 
