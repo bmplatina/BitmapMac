@@ -17,6 +17,9 @@ struct Sidebar: View {
                     NavigationLink(destination: ContentView()) {
                         Label("Home".localized(), systemImage: "house")
                     }
+                    NavigationLink(destination: BitmapWikiView()) {
+                        Label("Wiki".localized(), systemImage: "book")
+                    }
                     NavigationLink(destination: NewsroomView()) {
                         Label("Newsroom".localized(), systemImage: "newspaper")
                     }
