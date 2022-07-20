@@ -6,30 +6,7 @@
 //
 
 import SwiftUI
-import WebKit
 import Combine
-
-extension String {
-    func localized(comment: String = "") -> String {
-        return NSLocalizedString(self, comment: comment)
-    } // myLabel.text = "Hello".localized()
-    func localized(with argument: CVarArg = [], comment: String = "") -> String {
-            return String(format: self.localized(comment: comment), argument)
-    } // myLabel.text = "My Age %d".localized(with: 26, comment: "age")
-} // https://babbab2.tistory.com/59
-
-struct WebView: NSViewRepresentable {
-    let url: URL
-
-    func makeNSView(context: NSViewRepresentableContext<WebView>) -> WKWebView {
-        let webView: WKWebView = WKWebView()
-        let request = URLRequest(url: self.url)
-        webView.customUserAgent = "Safari/605"
-        webView.load(request)
-        return webView
-    }
-    func updateNSView(_ webView: WKWebView, context: NSViewRepresentableContext<WebView>) {}
-} // https://anpigon.tistory.com/132
 
 struct ContentView: View {
     @State private var wikiToken: loginToken?

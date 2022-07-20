@@ -12,7 +12,6 @@ struct Sidebar: View {
         NavigationView {
             List {
                 Text("Bitmap".localized())    // 캡션
-                
                 Group {
                     NavigationLink(destination: ContentView()) {
                         Label("Home".localized(), systemImage: "house")
@@ -27,7 +26,6 @@ struct Sidebar: View {
                         Label("Blog".localized(), systemImage: "message")
                     }
                 }
-                // 공간
                 Spacer()
                 Text("Bitmap Store".localized())
                 
@@ -51,7 +49,7 @@ struct Sidebar: View {
             .navigationTitle("Bitmap".localized())
             // 사이드바 폭과 높이 최솟값
             .frame(minWidth: 150, idealWidth: 250, maxWidth: 300)
-            .toolbar{
+            .toolbar {
                 //Toggle Sidebar Button
                 ToolbarItem(placement: .navigation){
                     Button(action: toggleSidebar, label: {
