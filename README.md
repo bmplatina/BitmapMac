@@ -1,6 +1,5 @@
 # Bitmap Application: Team Bitmap Web Application and ESD for macOS
-README supports English and Korean
-README 파일은 영어와 한국어를 지원합니다. 한국어 설명은 아래를 참조하세요.
+README supports English and Korean / README 파일은 영어와 한국어를 지원합니다. 한국어 설명은 아래를 참조하세요.
 
 ## English Description
 Welcome to Bitmap! We're preparing service platform for our teammates, and free ESD (Electronic Software Distribution) for everyone. Hope you're interested in.
