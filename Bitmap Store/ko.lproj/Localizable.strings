@@ -28,6 +28,14 @@
 // Games
 "Developer" = "개발";
 "Distributor" = "배급";
+"Install" = "설치";
+"Uninstall" = "제거";
+"Update" = "업데이트";
+
+// Other Downloads
+"Download" = "다운로드";
+"Delete" = "삭제";
+"Open" = "열기";
 
 // ERROR CODES
 "Bitmap Store couldn't reach to server. Please check your internet connection." = "서버에 접근할 수 없습니다. 인터넷 연결을 확인해주십시오.";

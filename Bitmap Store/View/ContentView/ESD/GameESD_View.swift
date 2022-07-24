@@ -31,8 +31,12 @@ struct GameESD_View: View {
                                         .bold()
                                     Text(gameInfo.gameDeveloper[index])
                                         .foregroundColor(.white)
-                                }.padding()
-                            }.cornerRadius(24).padding().shadow(radius: 4)
+                                }
+                                .padding()
+                            }
+                            .cornerRadius(24)
+                            .shadow(radius: 4)
+                            .padding()
                         }
                     }
                 }
@@ -69,6 +73,7 @@ struct GameDetailsView: View {
                         Text(gameInfo.gameHeadline[gameIndex])
                             .font(Font.largeTitle)
                             .bold()
+                            .padding()
                         Text(gameInfo.gameDescription[gameIndex])
                     }.padding()
                 }
@@ -76,15 +81,18 @@ struct GameDetailsView: View {
             
             Spacer()
             
-            Menu("Install Option".localized()) {
-                Button("Install".localized()) {
-                    // installAlert = true
-                }
-                Button("Update".localized()) {
-                }
+            switch gameInfo.isInstalled[gameIndex] {
+            case true:
                 Button("Uninstall".localized()) {
+                    
                 }
-            }.padding()
+                .padding()
+            case false:
+                Button("Install".localized()) {
+                    
+                }
+                .padding()
+            }
         }
         .navigationTitle(gameInfo.gameTitle[gameIndex])
     }
