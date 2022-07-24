@@ -57,6 +57,9 @@ struct Sidebar: View {
                     })
                 }
             }
+            .touchBar {
+                Text("Bitmap Powered by Platina")
+            }
             #if DEBUG
             ContentView()
             #endif

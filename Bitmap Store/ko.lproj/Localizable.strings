@@ -26,11 +26,13 @@
 "Explore" = "탐색";
 
 // Games
+"Dev" = "개발";
 "Developer" = "개발";
-"Distributor" = "배급";
+"Publisher" = "배급";
 "Install" = "설치";
 "Uninstall" = "제거";
 "Update" = "업데이트";
+" will be installed" = "이(가) 설치됩니다.";
 
 // Other Downloads
 "Download" = "다운로드";
