@@ -14,7 +14,7 @@ class exampleGameInfo: Identifiable {
         "OX"
     ]
     var gameDeveloper: [String] = [
-        "입학했더니 무한 팀플과 과제가 쌓여버린 건에 대하여",
+        "입학했더니 무한 팀플과\n과제가 쌓여버린 건에 대하여",
         "Team. Assertive"
     ]
     var gameImage: [String] = [

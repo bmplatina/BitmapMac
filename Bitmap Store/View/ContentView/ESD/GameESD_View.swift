@@ -9,47 +9,59 @@ import Foundation
 import SwiftUI
 
 struct GameESD_View: View {
-    let columnLayout = Array(repeating: GridItem(), count: 3)
+    @State private var showingPopover = false
+    let columnLayout = Array(repeating: GridItem(), count: 5)
     var gameInfo: exampleGameInfo = exampleGameInfo()
     var body: some View {
-        NavigationView {
-            ScrollView {
-                VStack /* LazyVGrid(columns: columnLayout, alignment: .center, spacing: 16) */ {
-                    ForEach(0..<gameInfo.gameIndex+1, id:\.self) { index in
-                        NavigationLink(destination: GameDetailsView(gameIndex: index)) {
-                            ZStack {
-                                Image(gameInfo.gameImage[index])
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 256)
-                                LinearGradient(gradient: Gradient(colors: [.clear, Color.black.opacity(0.5)]), startPoint: .top, endPoint: .bottom).frame(width:256, height: 362)
-                                VStack(alignment: .leading) {
-                                    // Spacer()
-                                    Text(gameInfo.gameTitle[index])
-                                        .foregroundColor(.white)
-                                        .font(Font.largeTitle)
-                                        .bold()
-                                    Text(gameInfo.gameDeveloper[index])
-                                        .foregroundColor(.white)
-                                }
-                                .padding()
+        ScrollView {
+            LazyVGrid(columns: columnLayout, alignment: .center, spacing: 2) {
+                ForEach(0..<gameInfo.gameIndex+1, id:\.self) { index in
+                    Button {
+                        showingPopover = true
+                    } label: {
+                        ZStack {
+                            Image(gameInfo.gameImage[index])
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 256)
+                            LinearGradient(gradient: Gradient(colors: [.clear, Color.black.opacity(0.5)]), startPoint: .top, endPoint: .bottom).frame(width:256, height: 362)
+                            VStack(alignment: .leading) {
+                                // Spacer()
+                                Text(gameInfo.gameTitle[index])
+                                    .foregroundColor(.white)
+                                    .font(Font.largeTitle)
+                                    .bold()
+                                Text(gameInfo.gameDeveloper[index])
+                                    .foregroundColor(.white)
                             }
-                            .cornerRadius(24)
-                            .shadow(radius: 4)
                             .padding()
+                        }
+                        .cornerRadius(24)
+                        .shadow(radius: 4)
+                        .padding()
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .sheet(isPresented: $showingPopover) {
+                        VStack(alignment: .padding) {
+                            Button {
+                                showingPopover = false
+                            } label: {
+                                Image(systemName: "x.circle")
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                            GameDetailsView(gameIndex: index)
                         }
                     }
                 }
             }
         }
-        .listStyle(SidebarListStyle())
         .navigationTitle("Games".localized())
     }
 }
 
 struct GameDetailsView: View {
-    let gameInfo: exampleGameInfo = exampleGameInfo()
     @State private var installAlert = false
+    let gameInfo: exampleGameInfo = exampleGameInfo()
     var gameIndex: Int
     var body: some View {
         VStack(alignment: .leading) {
@@ -87,11 +99,13 @@ struct GameDetailsView: View {
                     
                 }
                 .padding()
+                .buttonStyle(GrowingButton())
             case false:
                 Button("Install".localized()) {
                     
                 }
                 .padding()
+                .buttonStyle(GrowingButton())
             }
         }
         .navigationTitle(gameInfo.gameTitle[gameIndex])
