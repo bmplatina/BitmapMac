@@ -25,6 +25,7 @@
 		75830849288729F3002DDFFC /* BitmapWikiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75830848288729F3002DDFFC /* BitmapWikiView.swift */; };
 		75AC61AD287FEC21008215B2 /* LoginTokenDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AC61AC287FEC21008215B2 /* LoginTokenDecoder.swift */; };
 		75AC61AF287FEDE5008215B2 /* AccountManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AC61AE287FEDE5008215B2 /* AccountManagement.swift */; };
+		75E2133D288EA8B80047E3F8 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 75E2133C288EA8B80047E3F8 /* SwiftyJSON */; };
 		75E7FF4B2885C7F8008E985E /* game.json in Resources */ = {isa = PBXBuildFile; fileRef = 75E7FF4A2885C7F8008E985E /* game.json */; };
 		75EDF223287F1BD500B99748 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EDF222287F1BD500B99748 /* Sidebar.swift */; };
 /* End PBXBuildFile section */
@@ -79,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75E2133D288EA8B80047E3F8 /* SwiftyJSON in Frameworks */,
 				7511E254287EFAAD004563DF /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -251,6 +253,9 @@
 			dependencies = (
 			);
 			name = "Bitmap Store";
+			packageProductDependencies = (
+				75E2133C288EA8B80047E3F8 /* SwiftyJSON */,
+			);
 			productName = "Bitmap Store";
 			productReference = 7511E224287EF3AF004563DF /* Bitmap.app */;
 			productType = "com.apple.product-type.application";
@@ -324,6 +329,9 @@
 				ko,
 			);
 			mainGroup = 7511E21B287EF3AF004563DF;
+			packageReferences = (
+				75E2133B288EA8B80047E3F8 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+			);
 			productRefGroup = 7511E225287EF3AF004563DF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -463,6 +471,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=macosx*]" = x86_64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -523,6 +532,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=macosx*]" = x86_64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -534,6 +544,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 12.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -721,6 +732,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		75E2133B288EA8B80047E3F8 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
+			requirement = {
+				kind = exactVersion;
+				version = 5.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		75E2133C288EA8B80047E3F8 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 75E2133B288EA8B80047E3F8 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7511E21C287EF3AF004563DF /* Project object */;
 }

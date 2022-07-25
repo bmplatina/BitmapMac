@@ -9,6 +9,9 @@ import Foundation
 import SwiftUI
 import WebKit
 
+let bundlePath = Bundle.main.bundlePath
+let applicationSupportPath = NSHomeDirectory()
+
 extension String {
     func localized(comment: String = "") -> String {
         return NSLocalizedString(self, comment: comment)
@@ -17,6 +20,7 @@ extension String {
             return String(format: self.localized(comment: comment), argument)
     } // myLabel.text = "My Age %d".localized(with: 26, comment: "age")
     // Above about localized: https://babbab2.tistory.com/59
+    // Automatically convert English strings to Korean
 }
 
 extension View {

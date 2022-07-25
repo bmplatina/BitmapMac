@@ -70,7 +70,7 @@ struct GameESD_View: View {
                 }
             }
         }
-        .navigationTitle("Games".localized())
+        .navigationTitle("Games".localized() + ": ")
     }
 }
 
