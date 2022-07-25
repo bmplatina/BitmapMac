@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		750311C5288EAC9B0095C14B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 750311C4288EAC9B0095C14B /* Alamofire */; };
 		7511E228287EF3AF004563DF /* Bitmap_StoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7511E227287EF3AF004563DF /* Bitmap_StoreApp.swift */; };
 		7511E22A287EF3AF004563DF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7511E229287EF3AF004563DF /* ContentView.swift */; };
 		7511E22C287EF3B0004563DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7511E22B287EF3B0004563DF /* Assets.xcassets */; };
@@ -80,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				750311C5288EAC9B0095C14B /* Alamofire in Frameworks */,
 				75E2133D288EA8B80047E3F8 /* SwiftyJSON in Frameworks */,
 				7511E254287EFAAD004563DF /* WebKit.framework in Frameworks */,
 			);
@@ -255,6 +257,7 @@
 			name = "Bitmap Store";
 			packageProductDependencies = (
 				75E2133C288EA8B80047E3F8 /* SwiftyJSON */,
+				750311C4288EAC9B0095C14B /* Alamofire */,
 			);
 			productName = "Bitmap Store";
 			productReference = 7511E224287EF3AF004563DF /* Bitmap.app */;
@@ -331,6 +334,7 @@
 			mainGroup = 7511E21B287EF3AF004563DF;
 			packageReferences = (
 				75E2133B288EA8B80047E3F8 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				750311C3288EAC9B0095C14B /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 7511E225287EF3AF004563DF /* Products */;
 			projectDirPath = "";
@@ -734,6 +738,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		750311C3288EAC9B0095C14B /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = exactVersion;
+				version = 5.6.2;
+			};
+		};
 		75E2133B288EA8B80047E3F8 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
@@ -745,6 +757,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		750311C4288EAC9B0095C14B /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 750311C3288EAC9B0095C14B /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		75E2133C288EA8B80047E3F8 /* SwiftyJSON */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 75E2133B288EA8B80047E3F8 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;

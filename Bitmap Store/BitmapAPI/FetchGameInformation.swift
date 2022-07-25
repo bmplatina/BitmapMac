@@ -6,9 +6,26 @@
 //
 
 import Foundation
-import SwiftyJSON
 
 let gameInfoPath = applicationSupportPath + "/tmp/game.json"
+
+class getGameInfo {
+    var message: String?
+    func load() {
+        Task {
+            do {
+                // Fetch and decode a specific type
+                let gameURL = URL(string: "http://prodbybitmap.com/bmp/game.json")!
+                let user = try await URLSession.shared.decode(gameInfo.self, from: gameURL)
+                print("Downloaded \(user.gameTitle)")
+                message = user.gameTitle + "is deonloaded.".localized()
+            } catch {
+                print("Download error: \(error.localizedDescription)")
+                message = error.localizedDescription
+            }
+        }
+    }
+}
 
 struct gameInfo: Codable {
     var gameTitle: String

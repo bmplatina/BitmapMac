@@ -11,7 +11,9 @@ import SwiftUI
 struct GameESD_View: View {
     @State private var showingPopover = false
     let columnLayout = Array(repeating: GridItem(), count: 4)
-    var gameInfo: exampleGameInfo = exampleGameInfo()
+    let gameInfo: exampleGameInfo = exampleGameInfo()
+    let getGameJson: getGameInfo = getGameInfo()
+    
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columnLayout, alignment: .center, spacing: 2) {
@@ -70,13 +72,17 @@ struct GameESD_View: View {
                 }
             }
         }
-        .navigationTitle("Games".localized() + ": ")
+        .navigationTitle("Games".localized())
+        .onAppear {
+            self.getGameJson.load()
+        }
     }
 }
 
 struct GameDetailsView: View {
     @State private var installAlert = false
     let gameInfo: exampleGameInfo = exampleGameInfo()
+    let getGameJson: getGameInfo = getGameInfo()
     var gameIndex: Int
     var body: some View {
         VStack(alignment: .leading) {
@@ -127,6 +133,9 @@ struct GameDetailsView: View {
                 .padding()
                 .buttonStyle(GrowingButton())
             }
+        }
+        .onAppear {
+            self.getGameJson.load()
         }
     }
 }

@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import Foundation
 
 @main
 struct Bitmap_StoreApp: App {
+    
     var body: some Scene {
         WindowGroup {
             #if os(macOS)
