@@ -6,39 +6,52 @@
 //
 
 import Foundation
-
-let gameInfoPath = applicationSupportPath + "/tmp/game.json"
-
-class getGameInfo {
-    var isReachable = false
-    func load() {
-        Task {
-            do {
-                // Fetch and decode a specific type
-                let gameURL = URL(string: "http://prodbybitmap.com/bmp/game.json")!
-                let user = try await URLSession.shared.decode(gameInfo.self, from: gameURL)
-                print("Downloaded \(user.gameTitle)")
-                isReachable = true
-            } catch {
-                print("Download error: \(error.localizedDescription)")
-                isReachable = false
-            }
-        }
-    }
-}
+import Combine
 
 struct gameInfo: Codable {
-    var gameTitle: String
-    var gamePlatform: String
-    var gameEngine: String
-    var gameGenre: String
-    var gameDeveloper: String
-    var gamePublisher: String
-    var isEarlyAccess: Bool
-    var gameReleasedDate: Int
-    var gameWebsite: String
-    var gameImageURL: String
-    var gameDescription: String
+    let gameTitle: String
+    let gamePlatform: String
+    let gameEngine: String
+    let gameGenre: String
+    let gameDeveloper: String
+    let gamePublisher: String
+    let isEarlyAccess: Bool
+    let gameReleasedDate: Int
+    let gameWebsite: String
+    let gameImageURL: String
+    let gameDescription: String
+}
+
+struct loadGameAPI {
+    let url = URL(string:"http://developer.prodbybitmap.com/bmp/game.json")!
+    
+    func loadGameInfo() -> AnyPublisher<[gameInfo], Error> {
+        URLSession.shared.dataTaskPublisher(for: url)
+            .map{ $0.data }
+            .decode(type: [gameInfo].self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+    }
+    
+}
+
+class gameApiClient : ObservableObject {
+    var cancellable: AnyCancellable?
+    let api = loadGameAPI()
+    
+    func loadGameInfo(){
+        cancellable = api.loadGameInfo()
+            .sink(receiveCompletion: { result in
+                switch result {
+                case .finished:
+                    print("finished")
+                case .failure(let err):
+                    print("failed \(err)")
+                }
+            }, receiveValue: { todos in
+                print("receivedValue : todos: \(todos)")
+            })
+    }
+    
 }
 
 class exampleGameInfo: Identifiable {

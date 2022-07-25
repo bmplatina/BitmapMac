@@ -13,9 +13,11 @@ struct GameESD_View: View {
     @State private var showingPopover = false
     @State private var showingDigitalArtsFestivalSheet = false
     @State private var searchField: String = ""
+    @StateObject var apiClient = gameApiClient()
+    
     let columnLayout = Array(repeating: GridItem(), count: 4)
     let gameInfo: exampleGameInfo = exampleGameInfo()
-    let getGameJson: getGameInfo = getGameInfo()
+    
     var body: some View {
         VStack {
             ZStack {
@@ -30,7 +32,7 @@ struct GameESD_View: View {
                         .scaledToFit()
                         .frame(height: 30)
                     Spacer()
-                    if getGameJson.isReachable {
+                    if true {
                         Text("Online")
                     }
                     else {
@@ -66,11 +68,12 @@ struct GameESD_View: View {
                                     }
                                     LinearGradient(gradient: Gradient(colors: [.clear, Color.black.opacity(0.5)]), startPoint: .top, endPoint: .bottom).frame(width: 300, height: 424)
                                     VStack(alignment: .leading) {
-                                        // Spacer()
+                                        Spacer()
                                         Text(gameInfo.gameTitle[index])
                                             .foregroundColor(.white)
                                             .font(Font.largeTitle)
                                             .bold()
+                                        Divider()
                                         Text("Dev".localized() + ": " + gameInfo.gameDeveloper[index])
                                             .foregroundColor(.white)
                                     }
@@ -115,7 +118,7 @@ struct GameESD_View: View {
             }
             .navigationTitle("Games".localized())
             .onAppear {
-                self.getGameJson.load()
+                apiClient.loadGameInfo()
             }
         }
     }
@@ -123,9 +126,10 @@ struct GameESD_View: View {
 
 struct GameDetailsView: View {
     @State private var installAlert = false
+    
     let gameInfo: exampleGameInfo = exampleGameInfo()
-    let getGameJson: getGameInfo = getGameInfo()
     var gameIndex: Int
+    
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -199,7 +203,6 @@ struct GameDetailsView: View {
             }
         }
         .onAppear {
-            self.getGameJson.load()
         }
     }
 }
