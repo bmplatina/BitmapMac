@@ -32,7 +32,11 @@
 "Install" = "설치";
 "Uninstall" = "제거";
 "Update" = "업데이트";
+"Play" = "실행";
 " will be installed" = "이(가) 설치됩니다.";
+
+// Search
+"Filter" = "필터";
 
 // Other Downloads
 "Download" = "다운로드";
