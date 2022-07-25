@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import URLImage
 
 struct GameESD_View: View {
     @State private var showingPopover = false
@@ -14,7 +15,6 @@ struct GameESD_View: View {
     let columnLayout = Array(repeating: GridItem(), count: 4)
     let gameInfo: exampleGameInfo = exampleGameInfo()
     let getGameJson: getGameInfo = getGameInfo()
-    
     var body: some View {
         VStack {
             ZStack {
@@ -46,10 +46,16 @@ struct GameESD_View: View {
                             showingPopover = true
                         } label: {
                             ZStack {
-                                Image(gameInfo.gameImage[index])
+                                Image("unknownImage")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 300)
+                                URLImage(URL(string: gameInfo.gamePosterURL[index])!) { image in
+                                    image
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width:300)
+                                }
                                 LinearGradient(gradient: Gradient(colors: [.clear, Color.black.opacity(0.5)]), startPoint: .top, endPoint: .bottom).frame(width: 300, height: 424)
                                 VStack(alignment: .leading) {
                                     // Spacer()
@@ -112,11 +118,24 @@ struct GameDetailsView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Image(gameInfo.gameImage[gameIndex])
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 256)
-                    .padding()
+                ZStack {
+                    Image("unknownImage")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 256)
+                        .cornerRadius(24)
+                        .shadow(radius: 4)
+                        .padding()
+                    URLImage(URL(string: gameInfo.gamePosterURL[gameIndex])!) { image in
+                        image
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 256)
+                            .cornerRadius(24)
+                            .padding()
+                    }
+                }
+
                 VStack(alignment: .leading) {
                     Text(gameInfo.gameTitle[gameIndex])
                         .font(Font.largeTitle)

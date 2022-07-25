@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		750311C5288EAC9B0095C14B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 750311C4288EAC9B0095C14B /* Alamofire */; };
 		7511E228287EF3AF004563DF /* Bitmap_StoreApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7511E227287EF3AF004563DF /* Bitmap_StoreApp.swift */; };
 		7511E22A287EF3AF004563DF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7511E229287EF3AF004563DF /* ContentView.swift */; };
 		7511E22C287EF3B0004563DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7511E22B287EF3B0004563DF /* Assets.xcassets */; };
@@ -19,6 +18,10 @@
 		7511E257287F0202004563DF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7511E259287F0202004563DF /* Localizable.strings */; };
 		7521D29B28872FCE00335F41 /* ProjectFileESD_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7521D29A28872FCE00335F41 /* ProjectFileESD_View.swift */; };
 		7521D29D288730B100335F41 /* OtherESD_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7521D29C288730B100335F41 /* OtherESD_View.swift */; };
+		752D8F6B288F036F007C69A1 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 752D8F6A288F036F007C69A1 /* URLImage */; };
+		752D8F6D288F036F007C69A1 /* URLImageStore in Frameworks */ = {isa = PBXBuildFile; productRef = 752D8F6C288F036F007C69A1 /* URLImageStore */; };
+		752D8F6F288F0389007C69A1 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 752D8F6E288F0389007C69A1 /* SwiftyJSON */; };
+		752D8F71288F038C007C69A1 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 752D8F70288F038C007C69A1 /* Alamofire */; };
 		752F09362888B040008C1889 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752F09352888B040008C1889 /* Extensions.swift */; };
 		7545C0712888A54200A1596C /* FetchGameInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7545C0702888A54200A1596C /* FetchGameInformation.swift */; };
 		755922332885AB0400333154 /* DataModelJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755922322885AB0400333154 /* DataModelJSON.swift */; };
@@ -26,7 +29,6 @@
 		75830849288729F3002DDFFC /* BitmapWikiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75830848288729F3002DDFFC /* BitmapWikiView.swift */; };
 		75AC61AD287FEC21008215B2 /* LoginTokenDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AC61AC287FEC21008215B2 /* LoginTokenDecoder.swift */; };
 		75AC61AF287FEDE5008215B2 /* AccountManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AC61AE287FEDE5008215B2 /* AccountManagement.swift */; };
-		75E2133D288EA8B80047E3F8 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 75E2133C288EA8B80047E3F8 /* SwiftyJSON */; };
 		75E7FF4B2885C7F8008E985E /* game.json in Resources */ = {isa = PBXBuildFile; fileRef = 75E7FF4A2885C7F8008E985E /* game.json */; };
 		75EDF223287F1BD500B99748 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EDF222287F1BD500B99748 /* Sidebar.swift */; };
 /* End PBXBuildFile section */
@@ -81,8 +83,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				750311C5288EAC9B0095C14B /* Alamofire in Frameworks */,
-				75E2133D288EA8B80047E3F8 /* SwiftyJSON in Frameworks */,
+				752D8F71288F038C007C69A1 /* Alamofire in Frameworks */,
+				752D8F6B288F036F007C69A1 /* URLImage in Frameworks */,
+				752D8F6D288F036F007C69A1 /* URLImageStore in Frameworks */,
+				752D8F6F288F0389007C69A1 /* SwiftyJSON in Frameworks */,
 				7511E254287EFAAD004563DF /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,8 +260,10 @@
 			);
 			name = "Bitmap Store";
 			packageProductDependencies = (
-				75E2133C288EA8B80047E3F8 /* SwiftyJSON */,
-				750311C4288EAC9B0095C14B /* Alamofire */,
+				752D8F6A288F036F007C69A1 /* URLImage */,
+				752D8F6C288F036F007C69A1 /* URLImageStore */,
+				752D8F6E288F0389007C69A1 /* SwiftyJSON */,
+				752D8F70288F038C007C69A1 /* Alamofire */,
 			);
 			productName = "Bitmap Store";
 			productReference = 7511E224287EF3AF004563DF /* Bitmap.app */;
@@ -335,6 +341,7 @@
 			packageReferences = (
 				75E2133B288EA8B80047E3F8 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				750311C3288EAC9B0095C14B /* XCRemoteSwiftPackageReference "Alamofire" */,
+				752D8F69288F036F007C69A1 /* XCRemoteSwiftPackageReference "url-image" */,
 			);
 			productRefGroup = 7511E225287EF3AF004563DF /* Products */;
 			projectDirPath = "";
@@ -746,6 +753,14 @@
 				version = 5.6.2;
 			};
 		};
+		752D8F69288F036F007C69A1 /* XCRemoteSwiftPackageReference "url-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dmytro-anokhin/url-image";
+			requirement = {
+				kind = exactVersion;
+				version = 3.1.1;
+			};
+		};
 		75E2133B288EA8B80047E3F8 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
@@ -757,15 +772,25 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		750311C4288EAC9B0095C14B /* Alamofire */ = {
+		752D8F6A288F036F007C69A1 /* URLImage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 750311C3288EAC9B0095C14B /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
+			package = 752D8F69288F036F007C69A1 /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImage;
 		};
-		75E2133C288EA8B80047E3F8 /* SwiftyJSON */ = {
+		752D8F6C288F036F007C69A1 /* URLImageStore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 752D8F69288F036F007C69A1 /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImageStore;
+		};
+		752D8F6E288F0389007C69A1 /* SwiftyJSON */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 75E2133B288EA8B80047E3F8 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
 			productName = SwiftyJSON;
+		};
+		752D8F70288F038C007C69A1 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 750311C3288EAC9B0095C14B /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
