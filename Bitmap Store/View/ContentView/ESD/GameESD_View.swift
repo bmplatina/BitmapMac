@@ -48,6 +48,7 @@ struct GameESD_View: View {
                     Text("서울예술대학교 디지털아트전공 학생들의 각종 게임 전시작을 한눈에.")
                         .padding(.leading)
                     Divider()
+                        .padding()
                     LazyVGrid(columns: columnLayout, alignment: .center, spacing: 2) {
                         // List(gameViewmodel.gameInfos) { aGameInfos in }
                         ForEach(0..<gameViewmodel.gameInfos.count, id: \.self) { aGameInfos in
@@ -55,6 +56,7 @@ struct GameESD_View: View {
                         }
                     }
                     Divider()
+                        .padding()
                     Text("Other Games")
                         .font(.largeTitle)
                         .bold()
@@ -70,6 +72,7 @@ struct GameESD_View: View {
 
 struct GameButtons: View {
     @State private var showingPopover = false
+    @State private var installAlert = false
     var gameInfos: gameInfo
     
     init(_ gameInfos: gameInfo) {
@@ -77,7 +80,6 @@ struct GameButtons: View {
     }
     
     var body: some View {
-        VStack { }
         Button {
             showingPopover = true
         } label: {
@@ -133,93 +135,83 @@ struct GameButtons: View {
                     .buttonStyle(PlainButtonStyle())
                 }
                 .padding()
-                GameDetailsView(gameIndex: gameInfos.gameIndex)
+                // GameDetailsView(gameInfos: )
+// MARK: Sheets for Detail View and Installation Wizard
+                VStack(alignment: .leading) {
+                   HStack {
+                       ZStack {
+                           Image("unknownImage")
+                               .resizable()
+                               .scaledToFit()
+                               .frame(width: 256)
+                               .cornerRadius(24)
+                               .shadow(radius: 4)
+                               .padding()
+                           URLImage(URL(string: gameInfos.gameImageURL)!) { image in
+                               image
+                                   .resizable()
+                                   .scaledToFit()
+                                   .frame(width: 256)
+                                   .cornerRadius(24)
+                                   .padding()
+                           }
+                       }
+                       Divider()
+                       VStack(alignment: .leading) {
+                           Text(gameInfos.gameTitle)
+                               .font(Font.largeTitle)
+                               .bold()
+                               .padding(.leading)
+                           Text("Developer".localized() + ": " + gameInfos.gameDeveloper)
+                               .padding(.leading)
+                           Text("Publisher".localized() + ": " + gameInfos.gamePublisher)
+                               .padding(.leading)
+                           Divider()
+                               .padding()
+                           ScrollView {
+                               Text(gameInfos.gameHeadline)
+                                   .font(Font.largeTitle)
+                                   .bold()
+                                   .padding()
+                               Text(gameInfos.gameDescription)
+                           }.padding()
+                       }
+                   }
+                   
+                   Spacer()
+                   
+                   switch true {
+                   case true:
+                       HStack {
+                           Button(action: { }) {
+                               Text("Play".localized())
+                                   .font(.title3)
+                           }
+                           .padding()
+                           .buttonStyle(GrowingButton())
+                           Button(action: { }) {
+                               Text("Uninstall".localized())
+                                   .font(.title3)
+                           }
+                           .padding()
+                           .buttonStyle(GrowingButton())
+                       }
+                   case false:
+                       Button(action: { installAlert = true }) {
+                           Text("Install".localized())
+                               .font(.title3)
+                       }
+                       .alert(isPresented: $installAlert) {
+                           Alert(title: Text(gameInfos.gameTitle + " will be installed".localized()), message: Text("Bitmap Store couldn't reach to server. Please check your internet connection.".localized()), dismissButton: .default(Text("Dismiss")))
+                       }
+                       .padding()
+                       .buttonStyle(GrowingButton())
+                   }
+               }
             }
             .frame(width: 1000, height: 600)
             .fixedSize()
         }
-    }
-}
-
-struct GameDetailsView: View {
-    @State private var installAlert = false
-    
-    let gameInfo: exampleGameInfo = exampleGameInfo()
-    var gameIndex: Int
-    
-    var body: some View {
-        Text("Temp")
-         /* VStack(alignment: .leading) {
-            HStack {
-                ZStack {
-                    Image("unknownImage")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 256)
-                        .cornerRadius(24)
-                        .shadow(radius: 4)
-                        .padding()
-                    URLImage(URL(string: gameInfo.gamePosterURL[gameIndex])!) { image in
-                        image
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 256)
-                            .cornerRadius(24)
-                            .padding()
-                    }
-                }
-                Divider()
-                VStack(alignment: .leading) {
-                    Text(gameInfo.gameTitle[gameIndex])
-                        .font(Font.largeTitle)
-                        .bold()
-                        .padding(.leading)
-                    Text("Developer".localized() + ": " + gameInfo.gameDeveloper[gameIndex])
-                        .padding(.leading)
-                    Text("Publisher".localized() + ": " + gameInfo.gameDistributor[gameIndex])
-                        .padding(.leading)
-                    Divider()
-                        .padding()
-                    ScrollView {
-                        Text(gameInfo.gameHeadline[gameIndex])
-                            .font(Font.largeTitle)
-                            .bold()
-                            .padding()
-                        Text(gameInfo.gameDescription[gameIndex])
-                    }.padding()
-                }
-            }
-            
-            Spacer()
-            
-            switch gameInfo.isInstalled[gameIndex] {
-            case true:
-                HStack {
-                    Button(action: { }) {
-                        Text("Play".localized())
-                            .font(.title3)
-                    }
-                    .padding()
-                    .buttonStyle(GrowingButton())
-                    Button(action: { }) {
-                        Text("Uninstall".localized())
-                            .font(.title3)
-                    }
-                    .padding()
-                    .buttonStyle(GrowingButton())
-                }
-            case false:
-                Button(action: { installAlert = true }) {
-                    Text("Install".localized())
-                        .font(.title3)
-                }
-                .alert(isPresented: $installAlert) {
-                    Alert(title: Text(gameInfo.gameTitle[gameIndex] + " will be installed".localized()), message: Text("Bitmap Store couldn't reach to server. Please check your internet connection.".localized()), dismissButton: .default(Text("Dismiss")))
-                }
-                .padding()
-                .buttonStyle(GrowingButton())
-            }
-        } */
     }
 }
 
