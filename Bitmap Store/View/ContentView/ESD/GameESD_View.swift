@@ -10,13 +10,11 @@ import SwiftUI
 import URLImage
 
 struct GameESD_View: View {
-    @State private var showingPopover = false
-    @State private var showingDigitalArtsFestivalSheet = false
     @State private var searchField: String = ""
-    @StateObject var apiClient = gameApiClient()
+    @ObservedObject var gameViewmodel = gameInfoViewmodel()
     
+    let gameInfoExam = exampleGameInfo()
     let columnLayout = Array(repeating: GridItem(), count: 4)
-    let gameInfo: exampleGameInfo = exampleGameInfo()
     
     var body: some View {
         VStack {
@@ -51,75 +49,87 @@ struct GameESD_View: View {
                         .padding(.leading)
                     Divider()
                     LazyVGrid(columns: columnLayout, alignment: .center, spacing: 2) {
-                        ForEach(0..<gameInfo.gameIndex+1, id:\.self) { index in
-                            Button {
-                                showingPopover = true
-                            } label: {
-                                ZStack {
-//                                    Image("unknownImage")
-//                                        .resizable()
-//                                        .scaledToFit()
-//                                        .frame(width: 300)
-                                    URLImage(URL(string: gameInfo.gamePosterURL[index])!) { image in
-                                        image
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width:300)
-                                    }
-                                    LinearGradient(gradient: Gradient(colors: [.clear, Color.black.opacity(0.5)]), startPoint: .top, endPoint: .bottom).frame(width: 300, height: 424)
-                                    VStack(alignment: .leading) {
-                                        Spacer()
-                                        Text(gameInfo.gameTitle[index])
-                                            .foregroundColor(.white)
-                                            .font(Font.largeTitle)
-                                            .bold()
-                                        Divider()
-                                        Text("Dev".localized() + ": " + gameInfo.gameDeveloper[index])
-                                            .foregroundColor(.white)
-                                    }
-                                    .frame(width:256)
-                                    .padding()
-                                }
-                                .cornerRadius(24)
-                                .shadow(radius: 4)
-                                .padding()
-                            }
-                            .buttonStyle(PlainButtonStyle())
-                            .sheet(isPresented: $showingPopover) {
-                                VStack(alignment: .leading) {
-                                    HStack {
-                                        VStack(alignment: .leading) {
-                                            Text("Bitmap Games")
-                                                .font(Font.largeTitle)
-                                                .bold()
-                                            Text("Bitmap Store".localized())
-                                        }
-                                        
-                                        Spacer()
-                                        Button(action: { showingPopover = false }) {
-                                            Image(systemName: "x.circle")
-                                                .font(.title2)
-                                        }
-                                        .padding()
-                                        .background(Color.red)
-                                        .foregroundColor(.white)
-                                        .clipShape(Capsule())
-                                        .buttonStyle(PlainButtonStyle())
-                                    }
-                                    .padding()
-                                    GameDetailsView(gameIndex: index)
-                                }
-                                .frame(width: 1000, height: 600)
-                                .fixedSize()
-                            }
+                        // List(gameViewmodel.gameInfos) { aGameInfos in }
+                        ForEach(0..<gameViewmodel.gameInfos.count, id: \.self) { aGameInfos in
+                            GameButtons(gameViewmodel.gameInfos[aGameInfos])
                         }
                     }
                 }
             }
             .navigationTitle("Games".localized())
-            .onAppear {
-                apiClient.loadGameInfo()
+        }
+    }
+}
+
+struct GameButtons: View {
+    @State private var showingPopover = false
+    var gameInfos: gameInfo
+    
+    init(_ gameInfos: gameInfo) {
+        self.gameInfos = gameInfos
+    }
+    
+    var body: some View {
+        VStack { }
+        Button {
+            showingPopover = true
+        } label: {
+            ZStack {
+                Image("unknownImage")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 300)
+                URLImage(URL(string: gameInfos.gameImageURL)!) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width:300)
+                }
+                LinearGradient(gradient: Gradient(colors: [.clear, Color.black.opacity(0.5)]), startPoint: .top, endPoint: .bottom).frame(width: 300, height: 424)
+                VStack(alignment: .leading) {
+                    Spacer()
+                    Text(gameInfos.gameTitle)
+                        .foregroundColor(.white)
+                        .font(Font.largeTitle)
+                        .bold()
+                    Divider()
+                    Text("Dev".localized() + ": " + gameInfos.gameDeveloper)
+                        .foregroundColor(.white)
+                }
+                .frame(width:256)
+                .padding()
             }
+            .cornerRadius(24)
+            .shadow(radius: 4)
+            .padding()
+        }
+        .buttonStyle(PlainButtonStyle())
+        .sheet(isPresented: $showingPopover) {
+            VStack(alignment: .leading) {
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("Bitmap Games")
+                            .font(Font.largeTitle)
+                            .bold()
+                        Text("Bitmap Store".localized())
+                    }
+                    
+                    Spacer()
+                    Button(action: { showingPopover = false }) {
+                        Image(systemName: "x.circle")
+                            .font(.title2)
+                    }
+                    .padding()
+                    .background(Color.red)
+                    .foregroundColor(.white)
+                    .clipShape(Capsule())
+                    .buttonStyle(PlainButtonStyle())
+                }
+                .padding()
+                GameDetailsView(gameIndex: gameInfos.gameIndex)
+            }
+            .frame(width: 1000, height: 600)
+            .fixedSize()
         }
     }
 }
@@ -131,7 +141,8 @@ struct GameDetailsView: View {
     var gameIndex: Int
     
     var body: some View {
-        VStack(alignment: .leading) {
+        Text("Temp")
+         /* VStack(alignment: .leading) {
             HStack {
                 ZStack {
                     Image("unknownImage")
@@ -201,9 +212,7 @@ struct GameDetailsView: View {
                 .padding()
                 .buttonStyle(GrowingButton())
             }
-        }
-        .onAppear {
-        }
+        } */
     }
 }
 
