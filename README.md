@@ -67,3 +67,7 @@ Homebrew cask를 통한 설치는 아직 지원하지 않습니다.
 
 ### 연락처
 - 이재혁 (Platina): ryuplatina@icloud.com
+
+## Got Help
+- https://stackoverflow.com/questions/73123581/swiftui-how-to-parse-json-arrays-from-url-using-alamofire
+- https://www.youtube.com/c/%EA%B0%9C%EB%B0%9C%ED%95%98%EB%8A%94%EC%A0%95%EB%8C%80%EB%A6%AC
