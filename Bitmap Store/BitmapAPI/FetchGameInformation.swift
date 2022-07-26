@@ -42,12 +42,20 @@ struct gameResult: Codable, CustomStringConvertible {
     }
 }
 
+struct gamesResponse: Codable, CustomStringConvertible {
+    var games: [gameInfo]
+    
+    var description: String {
+        return "games.count: \(games.count) / info : \(games[0].gameTitle)"
+    }
+}
+
 class gameInfoViewmodel: ObservableObject {
     // MARK: Properties
     var subscription = Set<AnyCancellable>()
     @Published var gameInfos = [gameInfo]()
     
-    let url = "http://developer.prodbybitmap.com/bmp/game.json"
+    var url = "http://developer.prodbybitmap.com/game.json"
     
     init() {
         print(#fileID, #function, #line, "")
@@ -56,8 +64,8 @@ class gameInfoViewmodel: ObservableObject {
     
     func fetchGameInfo() {
         print(#fileID, #function, #line, "")
-        AF.request("http://developer.prodbybitmap.com/bmp/game.json")
-            .publishDecodable(type: gameResult.self)
+        AF.request(url, method: .get)
+            .publishDecodable(type: gamesResponse.self)
             .compactMap { $0.value }
             .map { $0.games }
             .sink(receiveCompletion: { completion in
@@ -70,40 +78,7 @@ class gameInfoViewmodel: ObservableObject {
     }
 }
 
-struct loadGameAPI {
-    let url = URL(string: "http://developer.prodbybitmap.com/bmp/game.json")!
-    
-    func loadGameInfo() -> AnyPublisher<[gameInfo], Error> {
-        URLSession.shared.dataTaskPublisher(for: url)
-            .map{ $0.data }
-            .decode(type: [gameInfo].self, decoder: JSONDecoder())
-            .eraseToAnyPublisher()
-    }
-}
-
-class gameApiClient : ObservableObject {
-    var isReachable = true
-    var cancellable: AnyCancellable?
-    let api = loadGameAPI()
-    
-    func loadGameInfo(){
-        cancellable = api.loadGameInfo()
-            .sink(receiveCompletion: { result in
-                switch result {
-                case .finished:
-                    print("finished")
-                    self.isReachable = true
-                case .failure(let err):
-                    print("failed \(err)")
-                    self.isReachable = false
-                }
-            }, receiveValue: { todos in
-                print("receivedValue : todos: \(todos)")
-            })
-    }
-    
-}
-
+// MARK: Exaple Templates. Deprecated
 class exampleGameInfo: Identifiable {
     var gameIndex: Int = 1
     var gameTitle: [String] = [

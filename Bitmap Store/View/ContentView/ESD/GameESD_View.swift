@@ -30,12 +30,12 @@ struct GameESD_View: View {
                         .scaledToFit()
                         .frame(height: 30)
                     Spacer()
-                    if true {
-                        Text("Online")
-                    }
-                    else {
-                        Text("Offline Mode")
-                    }
+//                    if true {
+//                        Text("Online")
+//                    }
+//                    else {
+//                        Text("Offline Mode")
+//                    }
                     TextField("Filter".localized(), text: $searchField)
                 }
             }
@@ -54,6 +54,13 @@ struct GameESD_View: View {
                             GameButtons(gameViewmodel.gameInfos[aGameInfos])
                         }
                     }
+                    Divider()
+                    Text("Other Games")
+                        .font(.largeTitle)
+                        .bold()
+                        .padding([.top, .leading])
+                    Text("여러 창작자의 다양한 인디 컨텐츠.")
+                        .padding(.leading)
                 }
             }
             .navigationTitle("Games".localized())
@@ -213,17 +220,6 @@ struct GameDetailsView: View {
                 .buttonStyle(GrowingButton())
             }
         } */
-    }
-}
-
-struct digitalArtsFestivalWebView: View {
-    var body: some View {
-        GeometryReader { g in
-            ScrollView {
-                WebView(url: URL(string: "https://siadigitalart.com/2022")!)
-                    .frame(height: g.size.height)
-            }.frame(height: g.size.height)
-        }
     }
 }
 
