@@ -13,26 +13,26 @@ struct Sidebar: View {
             List {
                 Text("Bitmap".localized())    // 캡션
                 Group {
-                    NavigationLink(destination: ContentView()) {
-                        Label("Home".localized(), systemImage: "house")
-                    }
-                    NavigationLink(destination: BitmapWikiView()) {
+//                    NavigationLink(destination: ContentView()) {
+//                        Label("Home".localized(), systemImage: "house")
+//                    }
+                    NavigationLink(destination: WebsiteView(url: "http://prodbybitmap.com", viewTitle: "Wiki")) {
                         Label("Wiki".localized(), systemImage: "book")
                     }
-                    NavigationLink(destination: NewsroomView()) {
+                    NavigationLink(destination: WebsiteView(url: "http://prodbybitmap.com/commission/bitmap_notices/", viewTitle: "Newsroom")) {
                         Label("Newsroom".localized(), systemImage: "newspaper")
                     }
-                    NavigationLink(destination: BlogView()) {
+                    NavigationLink(destination: WebsiteView(url: "http://prodbybitmap.com/commission/blog", viewTitle: "Blog")) {
                         Label("Blog".localized(), systemImage: "message")
                     }
                 }
                 Spacer()
                 Text("Bitmap Store".localized())
                 
-                NavigationLink(destination: ProjectFilesView()) {
+                NavigationLink(destination: WebsiteView(url: "http://prodbybitmap.com/commission/blog", viewTitle: "Project Files")) {
                     Label("Project Files".localized(), systemImage: "folder")
                 }
-                NavigationLink(destination: GameESD_View()) {
+                NavigationLink(destination: GameESD_View(isFromSidebar: true)) {
                     Label("Games".localized(), systemImage: "gamecontroller")
                 }
                 NavigationLink(destination: OtherESD_View()) {
@@ -41,7 +41,7 @@ struct Sidebar: View {
                 
                 Spacer()
                 Divider()
-                NavigationLink(destination: SettingsView()) {
+                NavigationLink(destination: WebsiteView(url: "http://www.prodbybitmap.com/wiki/Special:Login", viewTitle: "Settings")) {
                     Label("Settings".localized(), systemImage: "gear")
                 }
             }
@@ -60,9 +60,7 @@ struct Sidebar: View {
             .touchBar {
                 Text("Bitmap Powered by Platina")
             }
-            #if DEBUG
             ContentView()
-            #endif
         }
     }
 }

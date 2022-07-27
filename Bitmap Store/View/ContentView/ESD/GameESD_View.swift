@@ -13,32 +13,37 @@ struct GameESD_View: View {
     @State private var searchField: String = ""
     @ObservedObject var gameViewmodel = gameInfoViewmodel()
     
+    var isFromSidebar: Bool
+    
     let gameInfoExam = exampleGameInfo()
     let columnLayout = Array(repeating: GridItem(), count: 4)
     
     var body: some View {
         VStack {
-            ZStack {
-                Rectangle()
-                    .fill(Color.init(hex: "4188F1"))
-                    .frame(height: 42)
-                    .shadow(radius: 4)
-                HStack {
-                    Spacer()
-                    Image("bitmapWebLogo")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 30)
-                    Spacer()
-//                    if true {
-//                        Text("Online")
-//                    }
-//                    else {
-//                        Text("Offline Mode")
-//                    }
-                    TextField("Filter".localized(), text: $searchField)
+            if isFromSidebar {
+                ZStack {
+                    Rectangle()
+                        .fill(Color.init(hex: "4188F1"))
+                        .frame(height: 42)
+                        .shadow(radius: 4)
+                    HStack {
+                        Spacer()
+                        Image("bitmapWebLogo")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 30)
+                        Spacer()
+    //                    if true {
+    //                        Text("Online")
+    //                    }
+    //                    else {
+    //                        Text("Offline Mode")
+    //                    }
+                        TextField("Filter".localized(), text: $searchField)
+                    }
                 }
             }
+            
             ScrollView {
                 VStack(alignment: .leading) {
                     Text("Seoul Institute of the Arts Collection")
@@ -57,12 +62,6 @@ struct GameESD_View: View {
                     }
                     Divider()
                         .padding()
-                    Text("Other Games")
-                        .font(.largeTitle)
-                        .bold()
-                        .padding([.top, .leading])
-                    Text("여러 창작자의 다양한 인디 컨텐츠.")
-                        .padding(.leading)
                 }
             }
             .navigationTitle("Games".localized())
@@ -112,7 +111,7 @@ struct GameButtons: View {
             .shadow(radius: 4)
             .padding()
         }
-        .buttonStyle(PlainButtonStyle())
+        .buttonStyle(GrowingImageButton())
         .sheet(isPresented: $showingPopover) {
             VStack(alignment: .leading) {
                 HStack {
@@ -140,12 +139,16 @@ struct GameButtons: View {
                 VStack(alignment: .leading) {
                    HStack {
                        ZStack {
-                           Image("unknownImage")
-                               .resizable()
-                               .scaledToFit()
-                               .frame(width: 256)
-                               .cornerRadius(24)
-                               .shadow(radius: 4)
+//                           Image("unknownImage")
+//                               .resizable()
+//                               .scaledToFit()
+//                               .frame(width: 256)
+//                               .cornerRadius(24)
+//                               .shadow(radius: 4)
+//                               .padding()
+                           Rectangle()
+                               .opacity(0)
+                               .frame(width: 256, height: 256)
                                .padding()
                            URLImage(URL(string: gameInfos.gameImageURL)!) { image in
                                image
@@ -153,14 +156,22 @@ struct GameButtons: View {
                                    .scaledToFit()
                                    .frame(width: 256)
                                    .cornerRadius(24)
+                                   .shadow(radius: 4)
                                    .padding()
                            }
                        }
                        Divider()
                        VStack(alignment: .leading) {
-                           Text(gameInfos.gameTitle)
-                               .font(Font.largeTitle)
-                               .bold()
+                           HStack {
+                               Text(gameInfos.gameTitle)
+                                   .font(Font.largeTitle)
+                                   .bold()
+                               if gameInfos.isEarlyAccess {
+                                   Text("EARLY ACCESS".localized())
+                                       .padding(.top)
+                               }
+                           }.padding(.leading)
+                           Text("Released on: ".localized() + ": " + String(gameInfos.gameReleasedDate))
                                .padding(.leading)
                            Text("Developer".localized() + ": " + gameInfos.gameDeveloper)
                                .padding(.leading)
@@ -183,13 +194,17 @@ struct GameButtons: View {
                    switch true {
                    case true:
                        HStack {
-                           Button(action: { }) {
+                           Button(action: {
+                               // runCommand(command: "open " +  gameInfos.gameInstallationPathMac)
+                           }) {
                                Text("Play".localized())
                                    .font(.title3)
                            }
                            .padding()
                            .buttonStyle(GrowingButton())
-                           Button(action: { }) {
+                           Button(action: {
+                               // runCommand(command: "rm -rf " +  gameInfos.gameInstallationPathMac)
+                           }) {
                                Text("Uninstall".localized())
                                    .font(.title3)
                            }
@@ -213,12 +228,22 @@ struct GameButtons: View {
             .fixedSize()
         }
     }
+    
+    func runCommand(command: String) {
+        DispatchQueue.global().async {
+            let task = Process()
+            task.launchPath = "/bin/zsh"
+            task.arguments = ["-c", command]
+            task.launch()
+            task.waitUntilExit()
+        }
+    } // https://seorenn.github.io/note/swift-howto-run-shell-command.html
 }
 
 #if DEBUG
 struct ESD_Previews: PreviewProvider {
     static var previews: some View {
-        GameESD_View()
+        GameESD_View(isFromSidebar: true)
         // digitalArtsFestivalWebView()
     }
 }

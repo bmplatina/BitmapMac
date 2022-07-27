@@ -6,25 +6,34 @@
 //
 
 import SwiftUI
-import Combine
+import URLImage
 
 struct ContentView: View {
-    @State private var wikiToken: loginToken?
-    let url: String = "http://prodbybitmap.com"
-    
     var body: some View {
-        GeometryReader { g in
-            ScrollView {
-                WebView(url: URL(string: url)!)
-                    .frame(height: g.size.height)
-            }.frame(height: g.size.height)
+        ScrollView {
+            HStack(alignment: .center) {
+                URLImage(URL(string: "http://www.prodbybitmap.com/w/images/8/86/BitmapWeb.png")!) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width:1024)
+                }
+            }
+            VStack(alignment: .leading) {
+                Text("Games".localized())
+                    .font(.largeTitle)
+                    .bold()
+                    .padding(.leading)
+                GameESD_View(isFromSidebar: false)
+            }
         }
-        .navigationTitle("Bitmap".localized())
+        .navigationTitle("Home".localized())
     }
 }
 
-struct BitmapWikiView: View {
-    let url: String = "http://prodbybitmap.com/"
+struct WebsiteView: View {
+    var url: String
+    var viewTitle: String
     var body: some View {
         GeometryReader { g in
             ScrollView {
@@ -32,46 +41,7 @@ struct BitmapWikiView: View {
                     .frame(height: g.size.height)
             }.frame(height: g.size.height)
         }
-        .navigationTitle("Newsroom".localized())
-    }
-}
-
-struct NewsroomView: View {
-    let url: String = "http://prodbybitmap.com/commission/bitmap_notices"
-    var body: some View {
-        GeometryReader { g in
-            ScrollView {
-                WebView(url: URL(string: url)!)
-                    .frame(height: g.size.height)
-            }.frame(height: g.size.height)
-        }
-        .navigationTitle("Newsroom".localized())
-    }
-}
-
-struct BlogView: View {
-    let url: String = "http://prodbybitmap.com/commission/blog"
-    var body: some View {
-        GeometryReader { g in
-            ScrollView {
-                WebView(url: URL(string: url)!)
-                    .frame(height: g.size.height)
-            }.frame(height: g.size.height)
-        }
-        .navigationTitle("Blog".localized())
-    }
-}
-
-struct SettingsView: View {
-    let url: String = "http://prodbybitmap.com/commission/blog"
-    var body: some View {
-        GeometryReader { g in
-            ScrollView {
-                WebView(url: URL(string: url)!)
-                    .frame(height: g.size.height)
-            }.frame(height: g.size.height)
-        }
-        .navigationTitle("Blog".localized())
+        .navigationTitle(viewTitle.localized())
     }
 }
 

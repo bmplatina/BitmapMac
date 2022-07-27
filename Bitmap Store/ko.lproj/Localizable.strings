@@ -29,6 +29,8 @@
 "Dev" = "개발";
 "Developer" = "개발";
 "Publisher" = "배급";
+"Released on: " = "발매일: ";
+"EARLY ACCESS" = "얼리 액세스";
 "Install" = "설치";
 "Uninstall" = "제거";
 "Update" = "업데이트";
