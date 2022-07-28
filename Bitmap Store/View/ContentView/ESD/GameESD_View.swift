@@ -23,7 +23,7 @@ struct GameESD_View: View {
             if isFromSidebar {
                 ZStack {
                     Rectangle()
-                        .fill(Color.init(hex: "4188F1"))
+                        .fill(Color.init(hex: "4CAF5D"))
                         .frame(height: 42)
                         .shadow(radius: 4)
                     HStack {
@@ -100,6 +100,8 @@ struct GameButtons: View {
                         .foregroundColor(.white)
                         .font(Font.largeTitle)
                         .bold()
+                    Text(gameInfos.gameGenre)
+                        .foregroundColor(.white)
                     Divider()
                     Text("Dev".localized() + ": " + gameInfos.gameDeveloper)
                         .foregroundColor(.white)
@@ -139,13 +141,6 @@ struct GameButtons: View {
                 VStack(alignment: .leading) {
                    HStack {
                        ZStack {
-//                           Image("unknownImage")
-//                               .resizable()
-//                               .scaledToFit()
-//                               .frame(width: 256)
-//                               .cornerRadius(24)
-//                               .shadow(radius: 4)
-//                               .padding()
                            Rectangle()
                                .opacity(0)
                                .frame(width: 256, height: 256)
@@ -172,6 +167,8 @@ struct GameButtons: View {
                                }
                            }.padding(.leading)
                            Text("Released on: ".localized() + ": " + String(gameInfos.gameReleasedDate))
+                               .padding(.leading)
+                           Text("Genre".localized() + ": " + gameInfos.gameGenre)
                                .padding(.leading)
                            Text("Developer".localized() + ": " + gameInfos.gameDeveloper)
                                .padding(.leading)
