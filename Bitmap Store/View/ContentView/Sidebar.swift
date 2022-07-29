@@ -60,18 +60,24 @@ struct Sidebar: View {
             .touchBar {
                 Text("Bitmap Powered by Platina")
             }
+            #if os(macOS)
             ContentView()
+            #endif
         }
     }
 }
 
 // Toggle Sidebar Function
+#if os(macOS)
 func toggleSidebar() {
         NSApp.keyWindow?.firstResponder?.tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)
 }
+#endif
 
+#if DEBUG
 struct SidebarView_Previews: PreviewProvider {
     static var previews: some View {
         Sidebar()
     }
 }
+#endif

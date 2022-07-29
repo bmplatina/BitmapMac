@@ -72,6 +72,8 @@ struct GameESD_View: View {
 struct GameButtons: View {
     @State private var showingPopover = false
     @State private var installAlert = false
+    @State private var uninstallAlert = false
+    
     var gameInfos: gameInfo
     
     init(_ gameInfos: gameInfo) {
@@ -192,18 +194,30 @@ struct GameButtons: View {
                    case true:
                        HStack {
                            Button(action: {
-                               // runCommand(command: "open " +  gameInfos.gameInstallationPathMac)
+                               runCommand(command: "open \"" +  gameInfos.gameInstallationPathMac + "\"")
                            }) {
                                Text("Play".localized())
                                    .font(.title3)
                            }
                            .padding()
                            .buttonStyle(GrowingButton())
-                           Button(action: {
-                               // runCommand(command: "rm -rf " +  gameInfos.gameInstallationPathMac)
-                           }) {
+                           Button(action: { uninstallAlert = true }) {
                                Text("Uninstall".localized())
                                    .font(.title3)
+                           }
+                           .alert(isPresented: $uninstallAlert) {
+                               Alert(
+                                title: Text(gameInfos.gameTitle + " will be removed from your computer".localized()),
+                                message: Text(gameInfos.gameTitle + " will be deleted from your system. It cannot be undone.".localized()),
+                                primaryButton: .default(
+                                    Text("Cancel".localized())
+                                            ),
+                                            secondaryButton: .destructive(
+                                                Text("Delete".localized()),
+                                                action: {
+                                                    runCommand(command: "rm -rvf \"" +  gameInfos.gameInstallationPathMac + "\"")
+                                                }
+                                            ))
                            }
                            .padding()
                            .buttonStyle(GrowingButton())
@@ -235,6 +249,27 @@ struct GameButtons: View {
             task.waitUntilExit()
         }
     } // https://seorenn.github.io/note/swift-howto-run-shell-command.html
+    func runAppByBundleIdentifier(identifier: String) {
+        guard let url = NSWorkspace.shared.urlForApplication(withBundleIdentifier: identifier) else { return }
+
+        let path = "/bin"
+        let configuration = NSWorkspace.OpenConfiguration()
+        configuration.arguments = [path]
+        NSWorkspace.shared.openApplication(at: url,
+                                           configuration: configuration,
+                                           completionHandler: nil)
+    } // https://stackoverflow.com/questions/27505022/open-another-mac-app
+    
+    func runAppByPath(appPath: String) {
+        let url = NSURL(fileURLWithPath: appPath, isDirectory: true) as URL
+
+        let path = "/bin"
+        let configuration = NSWorkspace.OpenConfiguration()
+        configuration.arguments = [path]
+        NSWorkspace.shared.openApplication(at: url,
+                                           configuration: configuration,
+                                           completionHandler: nil)
+    }
 }
 
 #if DEBUG
