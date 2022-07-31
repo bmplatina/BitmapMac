@@ -7,8 +7,11 @@
 
 import SwiftUI
 import URLImage
+import Files
 
 struct ContentView: View {
+    @State var searchFieldText: String = ""
+    
     var body: some View {
         ScrollView {
             HStack(alignment: .center) {
@@ -19,6 +22,12 @@ struct ContentView: View {
                         .frame(width:1024)
                 }
             }
+            VStack(alignment: .center) {
+                TextField("Bitmap".localized() + " " + "Search".localized(), text: $searchFieldText)
+                    .padding()
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+            }
+            
             VStack(alignment: .leading) {
                 Text("Games".localized())
                     .font(.largeTitle)
@@ -27,7 +36,6 @@ struct ContentView: View {
                 GameESD_View(isFromSidebar: false)
             }
         }
-        .navigationTitle("Home".localized())
     }
 }
 

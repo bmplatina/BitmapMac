@@ -20,5 +20,7 @@ struct Bitmap_StoreApp: App {
             Sidebar()
                 .environment(\.urlImageService, urlImageService)
         }
+//        .commands {
+//        }
     }
 }

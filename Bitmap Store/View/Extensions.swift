@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import WebKit
+import Files
 
 let bundlePath = Bundle.main.bundlePath
 let applicationSupportPath = NSHomeDirectory()
@@ -128,3 +129,15 @@ struct GrowingImageButton: ButtonStyle {
             .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
     }
 } // https://www.hackingwithswift.com/quick-start/swiftui/customizing-button-with-buttonstyle
+
+
+
+class directory {
+    func createDirectory(dir: String) {
+        do {
+            try FileManager.default.createDirectory(atPath: dir, withIntermediateDirectories: true, attributes: nil)
+        } catch {
+            print(error)
+        }
+    }
+}

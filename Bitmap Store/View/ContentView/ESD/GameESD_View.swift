@@ -64,7 +64,7 @@ struct GameESD_View: View {
                         .padding()
                 }
             }
-            .navigationTitle("Games".localized())
+            .navigationTitle(isFromSidebar ? "Games".localized() : "Explore".localized())
         }
     }
 }
@@ -73,7 +73,7 @@ struct GameButtons: View {
     @State private var showingPopover = false   // Showing pop-ups for game details view
     @State private var installAlert = false     // Showing Install Wizard
     @State private var uninstallAlert = false   // Showing Uninstall Wizard
-    @State private var showProgressBar = false
+    @State private var showProgressBar = true
     @State private var showUnsupportedPlatformAlert = false
     @State private var progressBarValue = 0.0   // Progress bar value
     @State private var forceMacSupport = false
@@ -305,7 +305,9 @@ struct GameButtons: View {
                                .padding()
                                .buttonStyle(GrowingButton())
                                if showProgressBar {
-                                   ProgressView("", value: progressBarValue, total:100)
+                                   ProgressView("Downloading".localized(), value: progressBarValue, total:100)
+                                       .progressViewStyle(LinearProgressViewStyle())
+                                       .padding()
                                }
                            }
                        case false:
