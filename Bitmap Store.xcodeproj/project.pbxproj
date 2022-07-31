@@ -27,6 +27,8 @@
 		75AC61AD287FEC21008215B2 /* LoginTokenDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AC61AC287FEC21008215B2 /* LoginTokenDecoder.swift */; };
 		75AC61AF287FEDE5008215B2 /* AccountManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AC61AE287FEDE5008215B2 /* AccountManagement.swift */; };
 		75EDF223287F1BD500B99748 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EDF222287F1BD500B99748 /* Sidebar.swift */; };
+		75F61A222895F2E300CA5886 /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 75F61A212895F2E300CA5886 /* YouTubePlayerKit */; };
+		75F61A2A28968C3B00CA5886 /* Files in Frameworks */ = {isa = PBXBuildFile; productRef = 75F61A2928968C3B00CA5886 /* Files */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,8 +79,10 @@
 			files = (
 				752D8F71288F038C007C69A1 /* Alamofire in Frameworks */,
 				752D8F6B288F036F007C69A1 /* URLImage in Frameworks */,
+				75F61A222895F2E300CA5886 /* YouTubePlayerKit in Frameworks */,
 				752D8F6D288F036F007C69A1 /* URLImageStore in Frameworks */,
 				752D8F6F288F0389007C69A1 /* SwiftyJSON in Frameworks */,
+				75F61A2A28968C3B00CA5886 /* Files in Frameworks */,
 				7511E254287EFAAD004563DF /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -202,17 +206,9 @@
 			isa = PBXGroup;
 			children = (
 				75830847288729DB002DDFFC /* ContentView */,
-				75EDF21E287F175000B99748 /* Settings */,
 				752F09352888B040008C1889 /* Extensions.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		75EDF21E287F175000B99748 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,6 +232,8 @@
 				752D8F6C288F036F007C69A1 /* URLImageStore */,
 				752D8F6E288F0389007C69A1 /* SwiftyJSON */,
 				752D8F70288F038C007C69A1 /* Alamofire */,
+				75F61A212895F2E300CA5886 /* YouTubePlayerKit */,
+				75F61A2928968C3B00CA5886 /* Files */,
 			);
 			productName = "Bitmap Store";
 			productReference = 7511E224287EF3AF004563DF /* Bitmap.app */;
@@ -314,6 +312,8 @@
 				75E2133B288EA8B80047E3F8 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				750311C3288EAC9B0095C14B /* XCRemoteSwiftPackageReference "Alamofire" */,
 				752D8F69288F036F007C69A1 /* XCRemoteSwiftPackageReference "url-image" */,
+				75F61A202895F2E300CA5886 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */,
+				75F61A2828968C3B00CA5886 /* XCRemoteSwiftPackageReference "Files" */,
 			);
 			productRefGroup = 7511E225287EF3AF004563DF /* Products */;
 			projectDirPath = "";
@@ -735,6 +735,22 @@
 				version = 5.0.1;
 			};
 		};
+		75F61A202895F2E300CA5886 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SvenTiigi/YouTubePlayerKit";
+			requirement = {
+				kind = exactVersion;
+				version = 1.2.0;
+			};
+		};
+		75F61A2828968C3B00CA5886 /* XCRemoteSwiftPackageReference "Files" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JohnSundell/Files.git";
+			requirement = {
+				kind = exactVersion;
+				version = 4.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -757,6 +773,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 750311C3288EAC9B0095C14B /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		75F61A212895F2E300CA5886 /* YouTubePlayerKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 75F61A202895F2E300CA5886 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */;
+			productName = YouTubePlayerKit;
+		};
+		75F61A2928968C3B00CA5886 /* Files */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 75F61A2828968C3B00CA5886 /* XCRemoteSwiftPackageReference "Files" */;
+			productName = Files;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

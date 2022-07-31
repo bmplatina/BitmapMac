@@ -5,9 +5,9 @@
 //  Created by 재혁 on 2022/07/18.
 //
 
-import Foundation
 import SwiftUI
 import URLImage
+import YouTubePlayerKit
 
 struct GameESD_View: View {
     @State private var searchField: String = ""
@@ -70,9 +70,13 @@ struct GameESD_View: View {
 }
 
 struct GameButtons: View {
-    @State private var showingPopover = false
-    @State private var installAlert = false
-    @State private var uninstallAlert = false
+    @State private var showingPopover = false   // Showing pop-ups for game details view
+    @State private var installAlert = false     // Showing Install Wizard
+    @State private var uninstallAlert = false   // Showing Uninstall Wizard
+    @State private var showProgressBar = false
+    @State private var showUnsupportedPlatformAlert = false
+    @State private var progressBarValue = 0.0   // Progress bar value
+    @State private var forceMacSupport = false
     
     var gameInfos: gameInfo
     
@@ -98,10 +102,42 @@ struct GameButtons: View {
                 LinearGradient(gradient: Gradient(colors: [.clear, Color.black.opacity(0.5)]), startPoint: .top, endPoint: .bottom).frame(width: 300, height: 424)
                 VStack(alignment: .leading) {
                     Spacer()
-                    Text(gameInfos.gameTitle)
-                        .foregroundColor(.white)
-                        .font(Font.largeTitle)
-                        .bold()
+                    HStack {
+                        Text(gameInfos.gameTitle)
+                            .foregroundColor(.white)
+                            .font(Font.largeTitle)
+                            .bold()
+                        if gameInfos.gamePlatformWindows {
+                            Image("platformWindows10")
+                                .renderingMode(.template)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 20)
+                                .foregroundColor(.white)
+                        }
+                        if gameInfos.gamePlatformMac {
+                            Image("platformApple")
+                                .renderingMode(.template)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 20)
+                                .foregroundColor(.white)
+                        }
+                        if gameInfos.gamePlatformMobile {
+                            Image("platformAndroid")
+                                .renderingMode(.template)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 20)
+                                .foregroundColor(.white)
+                            Image("platformIOS")
+                                .renderingMode(.template)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 20)
+                                .foregroundColor(.white)
+                        }
+                    }
                     Text(gameInfos.gameGenre)
                         .foregroundColor(.white)
                     Divider()
@@ -119,23 +155,34 @@ struct GameButtons: View {
         .sheet(isPresented: $showingPopover) {
             VStack(alignment: .leading) {
                 HStack {
-                    VStack(alignment: .leading) {
+                    Button(action: { showingPopover = false }) {
+//                        Image(systemName: "x.circle")
+//                            .font(.title2)
+                        Circle()
+                            .fill(Color(hex: "ff5f57"))
+                            .frame(width:12.5)
+                    }
+                    .background(Color(hex: "ff5f57"))
+                    .foregroundColor(.white)
+                    .clipShape(Circle())
+                    .buttonStyle(PlainButtonStyle())
+                    .padding([.leading, .bottom, .trailing], 1)
+                    Circle()
+                        .fill(Color(hex: "625b5b"))
+                        .frame(width:12.5)
+                        .padding([.bottom, .trailing], 1)
+                    Circle()
+                        .fill(Color(hex: "625b5b"))
+                        .frame(width:12.5)
+                        .padding([.bottom, .trailing], 1)
+                    Spacer()
+                    VStack(alignment: .center) {
                         Text("Bitmap Games")
                             .font(Font.largeTitle)
                             .bold()
                         Text("Bitmap Store".localized())
                     }
-                    
                     Spacer()
-                    Button(action: { showingPopover = false }) {
-                        Image(systemName: "x.circle")
-                            .font(.title2)
-                    }
-                    .padding()
-                    .background(Color.red)
-                    .foregroundColor(.white)
-                    .clipShape(Capsule())
-                    .buttonStyle(PlainButtonStyle())
                 }
                 .padding()
                 // GameDetailsView(gameInfos: )
@@ -165,16 +212,46 @@ struct GameButtons: View {
                                    .bold()
                                if gameInfos.isEarlyAccess {
                                    Text("EARLY ACCESS".localized())
-                                       .padding(.top)
+                                       .padding(.top, 7)
                                }
                            }.padding(.leading)
-                           Text("Released on: ".localized() + ": " + String(gameInfos.gameReleasedDate))
+                           HStack {
+                               if gameInfos.gamePlatformWindows {
+                                   Image("platformWindows")
+                                       .resizable()
+                                       .scaledToFit()
+                                       .frame(height: 25)
+                                       .foregroundColor(.white)
+                               }
+                               if gameInfos.gamePlatformMac {
+                                   Image("platformApple")
+                                       .resizable()
+                                       .scaledToFit()
+                                       .frame(height: 25)
+                               }
+                               if gameInfos.gamePlatformMobile {
+                                   Image("platformAndroid")
+                                       .resizable()
+                                       .scaledToFit()
+                                       .frame(height: 25)
+                                       .foregroundColor(.white)
+                                   Image("platformIOS")
+                                       .renderingMode(.template)
+                                       .resizable()
+                                       .scaledToFit()
+                                       .frame(height: 25)
+                                       .foregroundColor(Color.init(hex: "0078d4"))
+                               }
+                           }.padding([.leading, .bottom])
+                           Text("Released on".localized() + ": " + gameInfos.gameReleasedDate)
                                .padding(.leading)
                            Text("Genre".localized() + ": " + gameInfos.gameGenre)
                                .padding(.leading)
                            Text("Developer".localized() + ": " + gameInfos.gameDeveloper)
                                .padding(.leading)
                            Text("Publisher".localized() + ": " + gameInfos.gamePublisher)
+                               .padding(.leading)
+                           Link("Visit game website".localized(), destination: URL(string: gameInfos.gameWebsite)!)
                                .padding(.leading)
                            Divider()
                                .padding()
@@ -183,6 +260,7 @@ struct GameButtons: View {
                                    .font(Font.largeTitle)
                                    .bold()
                                    .padding()
+                               // YouTubePlayerView("https://www.youtube.com/watch?v=WSLxwXMwIog").frame(width:200)
                                Text(gameInfos.gameDescription)
                            }.padding()
                        }
@@ -190,52 +268,83 @@ struct GameButtons: View {
                    
                    Spacer()
                    
-                   switch true {
-                   case true:
-                       HStack {
-                           Button(action: {
-                               runCommand(command: "open \"" +  gameInfos.gameInstallationPathMac + "\"")
-                           }) {
-                               Text("Play".localized())
+                    if gameInfos.gamePlatformMac || forceMacSupport {
+                       switch true {
+                       case true:
+                           HStack {
+                               Button(action: {
+                                   // runCommand(command: "open \"" +  gameInfos.gameInstallationPathMac + "\"")
+                               }) {
+                                   if forceMacSupport {
+                                       Text("Open".localized())
+                                           .font(.title3)
+                                   }
+                                   else {
+                                       Text("Play".localized())
+                                           .font(.title3)
+                                   }
+                               }
+                               .padding()
+                               .buttonStyle(GrowingButton())
+                               Button(action: { uninstallAlert = true }) {
+                                   Text("Uninstall".localized())
+                                       .font(.title3)
+                               }
+                               .alert(isPresented: $uninstallAlert) {
+                                   Alert(
+                                    title: Text(gameInfos.gameTitle + " will be removed from your computer".localized()),
+                                    message: Text(gameInfos.gameTitle + " will be deleted from your system. It cannot be undone.".localized()),
+                                    primaryButton: .destructive(
+                                        Text("Delete".localized()), action: {
+                                            // runCommand(command: "rm -rvf \"" +  gameInfos.gameInstallationPathMac + "\"")
+                                    }),
+                                    secondaryButton: .default(
+                                        Text("Cancel".localized())
+                                    ))
+                               }
+                               .padding()
+                               .buttonStyle(GrowingButton())
+                               if showProgressBar {
+                                   ProgressView("", value: progressBarValue, total:100)
+                               }
+                           }
+                       case false:
+                           Button(action: { installAlert = true }) {
+                               Text("Install".localized())
                                    .font(.title3)
+                           }
+                           .alert(isPresented: $installAlert) {
+                               Alert(title: Text(gameInfos.gameTitle + " will be installed".localized()), message: Text("Bitmap Store couldn't reach to server. Please check your internet connection.".localized()), dismissButton: .default(Text("Dismiss")))
                            }
                            .padding()
                            .buttonStyle(GrowingButton())
-                           Button(action: { uninstallAlert = true }) {
-                               Text("Uninstall".localized())
-                                   .font(.title3)
-                           }
-                           .alert(isPresented: $uninstallAlert) {
-                               Alert(
-                                title: Text(gameInfos.gameTitle + " will be removed from your computer".localized()),
-                                message: Text(gameInfos.gameTitle + " will be deleted from your system. It cannot be undone.".localized()),
-                                primaryButton: .default(
-                                    Text("Cancel".localized())
-                                            ),
-                                            secondaryButton: .destructive(
-                                                Text("Delete".localized()),
-                                                action: {
-                                                    runCommand(command: "rm -rvf \"" +  gameInfos.gameInstallationPathMac + "\"")
-                                                }
-                                            ))
-                           }
-                           .padding()
-                           .buttonStyle(GrowingButton())
                        }
-                   case false:
-                       Button(action: { installAlert = true }) {
-                           Text("Install".localized())
-                               .font(.title3)
-                       }
-                       .alert(isPresented: $installAlert) {
-                           Alert(title: Text(gameInfos.gameTitle + " will be installed".localized()), message: Text("Bitmap Store couldn't reach to server. Please check your internet connection.".localized()), dismissButton: .default(Text("Dismiss")))
-                       }
+                   }
+                   else {
+                       Button(action: {
+                           showUnsupportedPlatformAlert = true
+                       }, label: {
+                           Text("Unsupported Platform".localized())
+                       })
                        .padding()
                        .buttonStyle(GrowingButton())
+                       .alert(isPresented: $showUnsupportedPlatformAlert) {
+                           Alert(
+                            title: Text("Unsupported Platform".localized()),
+                            message: Text(gameInfos.gameTitle + " is not playable for Mac. But in case, if you are using Apple Silicon Mac, or emulator is installed, you may play this game. Do you want to install anyway?".localized()),
+                            primaryButton: .default(
+                                Text("Confirm".localized()), action: {
+                                    forceMacSupport = true
+                            }),
+                            secondaryButton: .default(
+                                Text("Cancel".localized())
+                            ))
+                       }
                    }
+                   
                }
             }
-            .frame(width: 1000, height: 600)
+            .frame(width: 1280, height: 800)
             .fixedSize()
         }
     }

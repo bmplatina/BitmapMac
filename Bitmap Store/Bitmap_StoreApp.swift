@@ -6,18 +6,19 @@
 //
 
 import SwiftUI
-import Foundation
+import URLImage
+import URLImageStore
 
 @main
 struct Bitmap_StoreApp: App {
-    
     var body: some Scene {
-        WindowGroup {
-            #if os(macOS)
+        let fileStore = URLImageFileStore()
+        let inMemoryStore = URLImageInMemoryStore()
+        let urlImageService = URLImageService(fileStore: fileStore, inMemoryStore: inMemoryStore)
+        
+        return WindowGroup {
             Sidebar()
-            #else
-            ContentView()
-            #endif
+                .environment(\.urlImageService, urlImageService)
         }
     }
 }

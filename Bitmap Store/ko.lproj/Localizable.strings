@@ -30,16 +30,20 @@
 "Developer" = "개발";
 "Publisher" = "배급";
 "Genre" = "장르";
-"Released on: " = "발매일: ";
+"Released on" = "발매일";
 "EARLY ACCESS" = "얼리 액세스";
+"Visit game website" = "게임 웹사이트 보기";
 "Install" = "설치";
 "Uninstall" = "제거";
 "Update" = "업데이트";
 "Play" = "실행";
 "Cancel" = "취소";
+"Confirm" = "승인";
+"Unsupported Platform" = "지원하지 않는 플랫폼";
 " will be installed" = "이(가) 설치됩니다.";
 " will be removed from your computer" = "이(가) 제거됩니다.";
 " will be deleted from your system. It cannot be undone." = "을(를) 시스템에서 삭제합니다. 이 작업은 되돌릴 수 없습니다.";
+" is not playable for Mac. But in case, if you are using Apple Silicon Mac, or emulator is installed, you may play this game. Do you want to install anyway?" = "은(는) Mac을 지원하지 않습니다. Apple Silicon Mac을 사용 중이거나 에뮬레이터가 설치되어 있는 경우 이 게임을 플레이할 수도 있습니다. 설치하시겠습니까?";
 "This game is not released." = "출시하지 않은 게임";
 
 // Search
