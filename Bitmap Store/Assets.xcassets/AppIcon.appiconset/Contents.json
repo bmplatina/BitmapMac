@@ -1,61 +1,61 @@
 {
   "images" : [
     {
-      "filename" : "AppStore16_00000.png",
+      "filename" : "16.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "16x16"
     },
     {
-      "filename" : "AppStore32_00000.png",
+      "filename" : "32 1.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "16x16"
     },
     {
-      "filename" : "AppStore32_00000 1.png",
+      "filename" : "32.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "32x32"
     },
     {
-      "filename" : "AppStore64_00000.png",
+      "filename" : "64.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "32x32"
     },
     {
-      "filename" : "AppStore128_00000.png",
+      "filename" : "128.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "128x128"
     },
     {
-      "filename" : "AppStore256_00000.png",
+      "filename" : "256 1.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "128x128"
     },
     {
-      "filename" : "AppStore256_00000 1.png",
+      "filename" : "256.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "256x256"
     },
     {
-      "filename" : "AppStore512_00000.png",
+      "filename" : "512 1.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "256x256"
     },
     {
-      "filename" : "AppStore512_00000 1.png",
+      "filename" : "512.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "512x512"
     },
     {
-      "filename" : "AppStore1024_00000.png",
+      "filename" : "1024.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "512x512"

@@ -12,6 +12,15 @@ import Files
 struct ContentView: View {
     @State var searchFieldText: String = ""
     
+    init() {
+        do {
+            try FileManager.default.createDirectory(atPath: "/Users/Shared/Bitmap Production", withIntermediateDirectories: true, attributes: nil)
+            try FileManager.default.createDirectory(atPath: "/Users/Shared/Bitmap Production/Games", withIntermediateDirectories: true, attributes: nil)
+        } catch {
+            print(error)
+        }
+    }
+    
     var body: some View {
         ScrollView {
             HStack(alignment: .center) {

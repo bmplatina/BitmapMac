@@ -163,7 +163,6 @@ struct GameButtons: View {
                             .frame(width:12.5)
                     }
                     .background(Color(hex: "ff5f57"))
-                    .foregroundColor(.white)
                     .clipShape(Circle())
                     .buttonStyle(PlainButtonStyle())
                     .padding([.leading, .bottom, .trailing], 1)
@@ -177,15 +176,12 @@ struct GameButtons: View {
                         .padding([.bottom, .trailing], 1)
                     Spacer()
                     VStack(alignment: .center) {
-                        Text("Bitmap Games")
-                            .font(Font.largeTitle)
+                        Text("Bitmap Store".localized() + ": " + gameInfos.gameTitle)
                             .bold()
-                        Text("Bitmap Store".localized())
                     }
                     Spacer()
                 }
                 .padding()
-                // GameDetailsView(gameInfos: )
 // MARK: Sheets for Detail View and Installation Wizard
                 VStack(alignment: .leading) {
                    HStack {
@@ -333,7 +329,7 @@ struct GameButtons: View {
                        .alert(isPresented: $showUnsupportedPlatformAlert) {
                            Alert(
                             title: Text("Unsupported Platform".localized()),
-                            message: Text(gameInfos.gameTitle + " is not playable for Mac. But in case, if you are using Apple Silicon Mac, or emulator is installed, you may play this game. Do you want to install anyway?".localized()),
+                            message: Text(gameInfos.gameTitle + " is not playable for Mac. But in case, if you are using Apple Silicon Mac for iOS support, or have emulator installed for Windows and Android support, you may play this game. Do you want to install anyway?".localized()),
                             primaryButton: .default(
                                 Text("Confirm".localized()), action: {
                                     forceMacSupport = true
