@@ -7,15 +7,18 @@
 
 import SwiftUI
 import URLImage
-import Files
+
+let bitmapHomeFolder = "/Users/Shared/Bitmap Production"
+let bitmapGameFolder = bitmapHomeFolder + "/Games"
 
 struct ContentView: View {
+    @Environment(\.colorScheme) var colorScheme // Detect dark mode
     @State var searchFieldText: String = ""
     
     init() {
         do {
-            try FileManager.default.createDirectory(atPath: "/Users/Shared/Bitmap Production", withIntermediateDirectories: true, attributes: nil)
-            try FileManager.default.createDirectory(atPath: "/Users/Shared/Bitmap Production/Games", withIntermediateDirectories: true, attributes: nil)
+            try FileManager.default.createDirectory(atPath: bitmapHomeFolder, withIntermediateDirectories: true, attributes: nil)
+            try FileManager.default.createDirectory(atPath: bitmapGameFolder, withIntermediateDirectories: true, attributes: nil)
         } catch {
             print(error)
         }
@@ -26,9 +29,11 @@ struct ContentView: View {
             HStack(alignment: .center) {
                 URLImage(URL(string: "http://www.prodbybitmap.com/w/images/8/86/BitmapWeb.png")!) { image in
                     image
+                        .renderingMode(.template)
                         .resizable()
                         .scaledToFit()
                         .frame(width:1024)
+                        .foregroundColor(colorScheme == .dark ? Color.init(hex: "ffffff") : Color.init(hex: "000000"))
                 }
             }
             VStack(alignment: .center) {

@@ -8,6 +8,7 @@
 import SwiftUI
 import URLImage
 import YouTubePlayerKit
+import Files
 
 struct GameESD_View: View {
     @State private var searchField: String = ""
@@ -70,6 +71,7 @@ struct GameESD_View: View {
 }
 
 struct GameButtons: View {
+    @Environment(\.colorScheme) var colorScheme // Detect dark mode
     @State private var showingPopover = false   // Showing pop-ups for game details view
     @State private var installAlert = false     // Showing Install Wizard
     @State private var uninstallAlert = false   // Showing Uninstall Wizard
@@ -141,7 +143,7 @@ struct GameButtons: View {
                     Text(gameInfos.gameGenre)
                         .foregroundColor(.white)
                     Divider()
-                    Text("Dev".localized() + ": " + gameInfos.gameDeveloper)
+                    Text("Dev".localized() + ": \(gameInfos.gameDeveloper)")
                         .foregroundColor(.white)
                 }
                 .frame(width:256)
@@ -167,16 +169,16 @@ struct GameButtons: View {
                     .buttonStyle(PlainButtonStyle())
                     .padding([.leading, .bottom, .trailing], 1)
                     Circle()
-                        .fill(Color(hex: "625b5b"))
+                        .fill(colorScheme == .dark ? Color(hex: "625b5b") : Color(hex: "d6d1cd"))
                         .frame(width:12.5)
                         .padding([.bottom, .trailing], 1)
                     Circle()
-                        .fill(Color(hex: "625b5b"))
+                        .fill(colorScheme == .dark ? Color(hex: "625b5b") : Color(hex: "d6d1cd"))
                         .frame(width:12.5)
                         .padding([.bottom, .trailing], 1)
                     Spacer()
                     VStack(alignment: .center) {
-                        Text("Bitmap Store".localized() + ": " + gameInfos.gameTitle)
+                        Text("Bitmap Store".localized() + ": \(gameInfos.gameTitle)")
                             .bold()
                     }
                     Spacer()
@@ -239,13 +241,13 @@ struct GameButtons: View {
                                        .foregroundColor(Color.init(hex: "0078d4"))
                                }
                            }.padding([.leading, .bottom])
-                           Text("Released on".localized() + ": " + gameInfos.gameReleasedDate)
+                           Text("Released on".localized() + ": \(gameInfos.gameReleasedDate)")
                                .padding(.leading)
-                           Text("Genre".localized() + ": " + gameInfos.gameGenre)
+                           Text("Genre".localized() + ": \(gameInfos.gameGenre)")
                                .padding(.leading)
-                           Text("Developer".localized() + ": " + gameInfos.gameDeveloper)
+                           Text("Developer".localized() + ": \(gameInfos.gameDeveloper)")
                                .padding(.leading)
-                           Text("Publisher".localized() + ": " + gameInfos.gamePublisher)
+                           Text("Publisher".localized() + ": \(gameInfos.gamePublisher)")
                                .padding(.leading)
                            Link("Visit game website".localized(), destination: URL(string: gameInfos.gameWebsite)!)
                                .padding(.leading)
@@ -269,16 +271,15 @@ struct GameButtons: View {
                        case true:
                            HStack {
                                Button(action: {
-                                   // runCommand(command: "open \"" +  gameInfos.gameInstallationPathMac + "\"")
-                               }) {
-                                   if forceMacSupport {
-                                       Text("Open".localized())
-                                           .font(.title3)
+                                   if gameInfos.gamePlatformMac {
+                                       runCommand(command: "open \"\(bitmapGameFolder)/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).app\"")
                                    }
                                    else {
-                                       Text("Play".localized())
-                                           .font(.title3)
+                                       runCommand(command: "open \"\(bitmapGameFolder)/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).exe\"")
                                    }
+                               }) {
+                                   Text(forceMacSupport ? "Open".localized() : "Play".localized())
+                                       .font(.title3)
                                }
                                .padding()
                                .buttonStyle(GrowingButton())
@@ -312,7 +313,14 @@ struct GameButtons: View {
                                    .font(.title3)
                            }
                            .alert(isPresented: $installAlert) {
-                               Alert(title: Text(gameInfos.gameTitle + " will be installed".localized()), message: Text("Bitmap Store couldn't reach to server. Please check your internet connection.".localized()), dismissButton: .default(Text("Dismiss")))
+                               Alert(title: Text(gameInfos.gameTitle + " will be installed".localized()), message: Text("Installation Path".localized() + ": \(bitmapGameFolder)"),
+                                     primaryButton: .destructive(
+                                         Text("Install".localized()), action: {
+                                             // runCommand(command: "rm -rvf \"" +  gameInfos.gameInstallationPathMac + "\"")
+                                     }),
+                                     secondaryButton: .default(
+                                         Text("Cancel".localized())
+                                     ))
                            }
                            .padding()
                            .buttonStyle(GrowingButton())
