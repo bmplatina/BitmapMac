@@ -8,7 +8,8 @@
 import SwiftUI
 import URLImage
 import YouTubePlayerKit
-import Files
+import Alamofire
+import Zip
 
 struct GameESD_View: View {
     @State private var searchField: String = ""
@@ -76,11 +77,13 @@ struct GameButtons: View {
     @State private var installAlert = false             // Showing Install Wizard
     @State private var uninstallAlert = false           // Showing Uninstall Wizard
     @State private var showProgressBar = false
+    @State private var showUnzipProgress = false
     @State private var showUnsupportedPlatformAlert = false
-    @State private var progressBarValue = CGFloat(0)    // Progress bar value
+    @State private var progressBarValue: CGFloat = 0.0    // Progress bar value
+    @State private var progressBarPercentage = "0%"
     @State private var forceMacSupport = false
-    
-    let timer = Timer.publish(every: 0.50, on: .current, in: .common).autoconnect()
+    @State private var isInstalling = false
+    @State private var isUninstalling = false
     
     var gameInfos: gameInfo
     
@@ -291,19 +294,20 @@ struct GameButtons: View {
                                        .padding()
                                    Divider()
                                        .padding(.horizontal)
-                                   if gameInfos.gamePlatformMac {
-                                       Text("Mac\nOS: macOS High Sierra 10.13+\nCPU: AMD64 architecture with SSE2 instruction set support, Apple Silicon\nGPU: Metal-capable Intel and AMD GPUs, Apple Silicon")
-                                           .padding()
+                                   HStack {
+                                       if gameInfos.gamePlatformMac {
+                                           Text("Mac\nOS: macOS High Sierra 10.13+\nCPU: AMD64 architecture with SSE2 instruction set support, Apple Silicon\nGPU: Metal-capable Intel and AMD GPUs, Apple Silicon")
+                                               .padding()
+                                       }
+                                       if gameInfos.gamePlatformMac && gameInfos.gamePlatformWindows {
+                                           Divider()
+                                               .padding()
+                                       }
+                                       if gameInfos.gamePlatformWindows {
+                                           Text("Windows\nOS: Windows 7 (SP1+) and Windows 10, 64-bit versions only.\nCPU: AMD64 architecture with SSE2 instruction set support\nGPU: DX10, DX11, and DX12-capable GPUs")
+                                               .padding()
+                                       }
                                    }
-                                   if gameInfos.gamePlatformMac && gameInfos.gamePlatformWindows {
-                                       Divider()
-                                           .padding()
-                                   }
-                                   if gameInfos.gamePlatformWindows {
-                                       Text("Windows\nOS: Windows 7 (SP1+) and Windows 10, 64-bit versions only.\nCPU: AMD64 architecture with SSE2 instruction set support\nGPU: DX10, DX11, and DX12-capable GPUs")
-                                           .padding()
-                                   }
-                                   
                                }.padding()
                                 .background(Rectangle().fill(colorScheme == .dark ? Color.init(hex: "404040") : Color.init(hex: "dedede")))
                                 .cornerRadius(16)
@@ -313,14 +317,14 @@ struct GameButtons: View {
                    }
                    
                    Spacer()
-                   
-                    if gameInfos.gamePlatformMac || forceMacSupport {
-                       switch false {
+                    
+                   if gameInfos.gamePlatformMac || forceMacSupport {
+                       switch isInstalling {
                        case true:
                            HStack {
                                Button(action: {
                                    if gameInfos.gamePlatformMac {
-                                       runCommand(command: "open \"\(bitmapGameFolder)/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).app\"")
+                                       runAppByPath(appPath: "\"\(bitmapGameFolder)/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).app\"")
                                    }
                                    else {
                                        runCommand(command: "open \"\(bitmapGameFolder)/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).exe\"")
@@ -341,7 +345,7 @@ struct GameButtons: View {
                                     message: Text(gameInfos.gameTitle + " will be deleted from your system. It cannot be undone.".localized()),
                                     primaryButton: .destructive(
                                         Text("Delete".localized()), action: {
-                                            // runCommand(command: "rm -rvf \"" +  gameInfos.gameInstallationPathMac + "\"")
+                                            runCommand(command: "rm -rvf \"\(bitmapGameFolder)/\(gameInfos.gameBinaryName)/\"")
                                     }),
                                     secondaryButton: .default(
                                         Text("Cancel".localized())
@@ -350,12 +354,9 @@ struct GameButtons: View {
                                .padding()
                                .buttonStyle(GrowingButton())
                                if showProgressBar {
-                                   ProgressView("Downloading".localized(), value: progressBarValue, total:100)
+                                   ProgressView(showUnzipProgress ? "Writing to Disk".localized() : "Downloading".localized() + ": \(progressBarPercentage)", value: progressBarValue, total: CGFloat(1.0))
                                        .progressViewStyle(LinearProgressViewStyle())
                                        .padding()
-                                       .onReceive(timer, perform: { _ in
-                                           
-                                       })
                                }
                            }
                        case false:
@@ -368,12 +369,13 @@ struct GameButtons: View {
                                      primaryButton: .destructive(
                                          Text("Install".localized()), action: {
                                              do {
-                                                 try FileManager.default.createDirectory(atPath: "\(bitmapGameFolder)/\(gameInfos.gameBinaryName)", withIntermediateDirectories: true, attributes: nil)
+                                                 try FileManager.default.createDirectory(atPath: "\(bitmapGameFolder)/\(gameInfos.gameBinaryName)/", withIntermediateDirectories: true, attributes: nil)
                                              } catch {
                                                  print(error)
                                              }
-                                             runCommandWith(command: "cd \"\(bitmapGameFolder)/\(gameInfos.gameBinaryName)\";curl -LO \(gameInfos.gameDownloadMacURL) -o --progress-bar")
-                                             // runCommand(command: "rm -rvf \"" +  gameInfos.gameInstallationPathMac + "\"")
+                                             downloadGame(url: gameInfos.gameDownloadMacURL, gameName: gameInfos.gameBinaryName)
+                                             showProgressBar = true
+                                             isInstalling = true
                                      }),
                                      secondaryButton: .default(
                                          Text("Cancel".localized())
@@ -410,23 +412,7 @@ struct GameButtons: View {
             .fixedSize()
         }
     }
-    func runCommandWith(command: String) {
-        try! Process.run(URL(fileURLWithPath: "/bin/zsh"),
-                         arguments: ["-c", command]) {
-            (task) in
-            guard task.terminationStatus == 0 else {
-                // Failed
-                return
-            }
-
-            if let results = task.standardOutput as? String {
-                if let percentage = Int.getIntFromString(from: results) {
-                    print(percentage)
-                }
-                // print(results)
-            }
-        }
-    }
+    
     func runCommand(command: String) {
         DispatchQueue.global().async {
             let task = Process()
@@ -438,7 +424,6 @@ struct GameButtons: View {
     } // https://seorenn.github.io/note/swift-howto-run-shell-command.html
     func runAppByBundleIdentifier(identifier: String) {
         guard let url = NSWorkspace.shared.urlForApplication(withBundleIdentifier: identifier) else { return }
-
         let path = "/bin"
         let configuration = NSWorkspace.OpenConfiguration()
         configuration.arguments = [path]
@@ -449,13 +434,60 @@ struct GameButtons: View {
     
     func runAppByPath(appPath: String) {
         let url = NSURL(fileURLWithPath: appPath, isDirectory: true) as URL
-
         let path = "/bin"
         let configuration = NSWorkspace.OpenConfiguration()
         configuration.arguments = [path]
         NSWorkspace.shared.openApplication(at: url,
                                            configuration: configuration,
                                            completionHandler: nil)
+    }
+    
+    func downloadGame(url: String, gameName: String) {
+        self.showUnzipProgress = false
+        // 파일매니저
+        let fileManager = FileManager.default
+        // 앱 경로
+        let appURL = fileManager.urls(for: .userDirectory, in: .localDomainMask)[0]
+        // 파일 경로 생성
+        let fileURL = appURL.appendingPathComponent("Shared/Bitmap Production/Games/\(gameName)/\(gameName).zip")
+        // 파일 경로 지정 및 다운로드 옵션 설정 ( 이전 파일 삭제 , 디렉토리 생성 )
+        let destination: DownloadRequest.Destination = { _, _ in
+            return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
+        }
+        // 다운로드 시작
+        AF.download(url, method: .get, parameters: nil, encoding: JSONEncoding.default, to: destination).downloadProgress { (progress) in
+            // 이 부분에서 프로그레스 수정
+            self.progressBarValue = CGFloat(progress.fractionCompleted)
+            self.progressBarPercentage = "\(Int(progress.fractionCompleted * 100))%"
+            print("Downloading: \(progress.fractionCompleted)")
+        }
+        .response { response in
+            if response.error != nil {
+                print("Download Failed")
+            }
+            else {
+                print("\(gameName) has been Downloaded")
+                unzipGame(gameName: gameName)
+            }
+        }
+    }   // https://gonslab.tistory.com/14
+    func unzipGame(gameName: String) {
+        do {
+            self.showUnzipProgress = true
+            let gameDirectory = FileManager.default.urls(for:.userDirectory, in: .localDomainMask)[0]
+            let zipPath = gameDirectory.appendingPathComponent("Shared/Bitmap Production/Games/\(gameName)/\(gameName).zip")
+            let destinationDirectory = gameDirectory.appendingPathComponent("Shared/Bitmap Production/Games/\(gameName)/")
+            try Zip.unzipFile(zipPath, destination: destinationDirectory, overwrite: true, password: "", progress: { (progress) -> () in
+                self.progressBarValue = CGFloat(progress)
+                print("Unzipping: \(progress)")
+            }) // Unzip
+            self.showUnzipProgress = false
+            self.showProgressBar = false
+
+        }
+        catch {
+            print("Something went wrong")
+        }
     }
 }
 

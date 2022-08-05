@@ -16,7 +16,6 @@
 		7511E246287EF3B0004563DF /* Bitmap_StoreUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7511E245287EF3B0004563DF /* Bitmap_StoreUITestsLaunchTests.swift */; };
 		7511E254287EFAAD004563DF /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7511E253287EFAAD004563DF /* WebKit.framework */; };
 		7511E257287F0202004563DF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7511E259287F0202004563DF /* Localizable.strings */; };
-		75177955289B17C300681A30 /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75177954289B17C300681A30 /* DownloadManager.swift */; };
 		75177958289B1A8F00681A30 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 75177957289B1A8F00681A30 /* Zip */; };
 		7521D29D288730B100335F41 /* OtherESD_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7521D29C288730B100335F41 /* OtherESD_View.swift */; };
 		752D8F6B288F036F007C69A1 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 752D8F6A288F036F007C69A1 /* URLImage */; };
@@ -62,7 +61,6 @@
 		7511E245287EF3B0004563DF /* Bitmap_StoreUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bitmap_StoreUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7511E253287EFAAD004563DF /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		7511E258287F0202004563DF /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
-		75177954289B17C300681A30 /* DownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
 		7521D29C288730B100335F41 /* OtherESD_View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherESD_View.swift; sourceTree = "<group>"; };
 		752F09352888B040008C1889 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		7545C0702888A54200A1596C /* FetchGameInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchGameInformation.swift; sourceTree = "<group>"; };
@@ -177,7 +175,6 @@
 			isa = PBXGroup;
 			children = (
 				75AC61AB287FEC00008215B2 /* BitmapAPI */,
-				75177954289B17C300681A30 /* DownloadManager.swift */,
 			);
 			path = Cores;
 			sourceTree = "<group>";
@@ -368,7 +365,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7545C0712888A54200A1596C /* FetchGameInformation.swift in Sources */,
-				75177955289B17C300681A30 /* DownloadManager.swift in Sources */,
 				7511E22A287EF3AF004563DF /* ContentView.swift in Sources */,
 				7521D29D288730B100335F41 /* OtherESD_View.swift in Sources */,
 				75EDF223287F1BD500B99748 /* Sidebar.swift in Sources */,
