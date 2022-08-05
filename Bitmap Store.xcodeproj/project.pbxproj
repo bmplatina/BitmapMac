@@ -68,7 +68,7 @@
 		7545C0702888A54200A1596C /* FetchGameInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchGameInformation.swift; sourceTree = "<group>"; };
 		755D0C692885A9AD00CCBCF5 /* GameESD_View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameESD_View.swift; sourceTree = "<group>"; };
 		75EDF222287F1BD500B99748 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
-		75EDF228287F3CFE00B99748 /* Bitmap-Store-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bitmap-Store-Info.plist"; sourceTree = SOURCE_ROOT; };
+		75EDF228287F3CFE00B99748 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,7 +134,7 @@
 				7511E227287EF3AF004563DF /* Bitmap_StoreApp.swift */,
 				7511E22B287EF3B0004563DF /* Assets.xcassets */,
 				7511E230287EF3B0004563DF /* Bitmap_Store.entitlements */,
-				75EDF228287F3CFE00B99748 /* Bitmap-Store-Info.plist */,
+				75EDF228287F3CFE00B99748 /* Info.plist */,
 				7511E22D287EF3B0004563DF /* Preview Content */,
 			);
 			path = "Bitmap Store";
@@ -551,7 +551,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Bitmap-Store-Info.plist";
+				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -586,7 +586,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Bitmap-Store-Info.plist";
+				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -96,6 +96,12 @@ extension URLSession {
     }   // https://www.hackingwithswift.com/quick-start/concurrency/how-to-download-json-from-the-internet-and-decode-it-into-any-codable-type
 }
 
+extension Int {
+    static func getIntFromString(from string: String) -> Int? {
+        return Int(string.components(separatedBy: CharacterSet.decimalDigits.inverted).joined())
+    }
+}   // https://stackoverflow.com/questions/30342744/swift-how-to-get-integer-from-string-and-convert-it-into-integer
+
 struct WebView: NSViewRepresentable {
     let url: URL
 

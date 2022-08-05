@@ -71,14 +71,16 @@ struct GameESD_View: View {
 }
 
 struct GameButtons: View {
-    @Environment(\.colorScheme) var colorScheme // Detect dark mode
-    @State private var showingPopover = false   // Showing pop-ups for game details view
-    @State private var installAlert = false     // Showing Install Wizard
-    @State private var uninstallAlert = false   // Showing Uninstall Wizard
-    @State private var showProgressBar = true
+    @Environment(\.colorScheme) var colorScheme         // Detect dark mode
+    @State private var showingPopover = false           // Showing pop-ups for game details view
+    @State private var installAlert = false             // Showing Install Wizard
+    @State private var uninstallAlert = false           // Showing Uninstall Wizard
+    @State private var showProgressBar = false
     @State private var showUnsupportedPlatformAlert = false
-    @State private var progressBarValue = 0.0   // Progress bar value
+    @State private var progressBarValue = CGFloat(0)    // Progress bar value
     @State private var forceMacSupport = false
+    
+    let timer = Timer.publish(every: 0.50, on: .current, in: .common).autoconnect()
     
     var gameInfos: gameInfo
     
@@ -254,20 +256,66 @@ struct GameButtons: View {
                            Divider()
                                .padding()
                            ScrollView {
-                               Text(gameInfos.gameHeadline)
-                                   .font(Font.largeTitle)
-                                   .bold()
-                                   .padding()
-                               // YouTubePlayerView("https://www.youtube.com/watch?v=WSLxwXMwIog").frame(width:200)
-                               Text(gameInfos.gameDescription)
-                           }.padding()
+                               VStack(alignment: .leading) {
+                                   Text("Instruction Video".localized())
+                                       .font(Font.largeTitle)
+                                       .bold()
+                                       .padding()
+                                   Divider()
+                                       .padding(.horizontal)
+                                   YouTubePlayerView("https://www.youtube.com/watch?v=WSLxwXMwIog")
+                                       .frame(width:200)
+                                       .padding()
+                               }.padding()
+                                .background(Rectangle().fill(colorScheme == .dark ? Color.init(hex: "404040") : Color.init(hex: "dedede")))
+                                .cornerRadius(16)
+                                .shadow(radius: 4)
+                               
+                               VStack(alignment: .leading) {
+                                   Text(gameInfos.gameHeadline)
+                                       .font(Font.largeTitle)
+                                       .bold()
+                                       .padding()
+                                   Divider()
+                                       .padding(.horizontal)
+                                   Text(gameInfos.gameDescription)
+                                       .padding()
+                               }.padding()
+                                .background(Rectangle().fill(colorScheme == .dark ? Color.init(hex: "404040") : Color.init(hex: "dedede")))
+                                .cornerRadius(16)
+                                .shadow(radius: 4)
+                               VStack(alignment: .leading) {
+                                   Text("Requirements".localized())
+                                       .font(Font.largeTitle)
+                                       .bold()
+                                       .padding()
+                                   Divider()
+                                       .padding(.horizontal)
+                                   if gameInfos.gamePlatformMac {
+                                       Text("Mac\nOS: macOS High Sierra 10.13+\nCPU: AMD64 architecture with SSE2 instruction set support, Apple Silicon\nGPU: Metal-capable Intel and AMD GPUs, Apple Silicon")
+                                           .padding()
+                                   }
+                                   if gameInfos.gamePlatformMac && gameInfos.gamePlatformWindows {
+                                       Divider()
+                                           .padding()
+                                   }
+                                   if gameInfos.gamePlatformWindows {
+                                       Text("Windows\nOS: Windows 7 (SP1+) and Windows 10, 64-bit versions only.\nCPU: AMD64 architecture with SSE2 instruction set support\nGPU: DX10, DX11, and DX12-capable GPUs")
+                                           .padding()
+                                   }
+                                   
+                               }.padding()
+                                .background(Rectangle().fill(colorScheme == .dark ? Color.init(hex: "404040") : Color.init(hex: "dedede")))
+                                .cornerRadius(16)
+                                .shadow(radius: 4)
+                           }.padding(.horizontal)
                        }
                    }
                    
                    Spacer()
                    
                     if gameInfos.gamePlatformMac || forceMacSupport {
-                       switch true {
+                       switch false {
                        case true:
                            HStack {
                                Button(action: {
@@ -305,6 +353,9 @@ struct GameButtons: View {
                                    ProgressView("Downloading".localized(), value: progressBarValue, total:100)
                                        .progressViewStyle(LinearProgressViewStyle())
                                        .padding()
+                                       .onReceive(timer, perform: { _ in
+                                           
+                                       })
                                }
                            }
                        case false:
@@ -316,6 +367,12 @@ struct GameButtons: View {
                                Alert(title: Text(gameInfos.gameTitle + " will be installed".localized()), message: Text("Installation Path".localized() + ": \(bitmapGameFolder)"),
                                      primaryButton: .destructive(
                                          Text("Install".localized()), action: {
+                                             do {
+                                                 try FileManager.default.createDirectory(atPath: "\(bitmapGameFolder)/\(gameInfos.gameBinaryName)", withIntermediateDirectories: true, attributes: nil)
+                                             } catch {
+                                                 print(error)
+                                             }
+                                             runCommandWith(command: "cd \"\(bitmapGameFolder)/\(gameInfos.gameBinaryName)\";curl -LO \(gameInfos.gameDownloadMacURL) -o --progress-bar")
                                              // runCommand(command: "rm -rvf \"" +  gameInfos.gameInstallationPathMac + "\"")
                                      }),
                                      secondaryButton: .default(
@@ -347,14 +404,29 @@ struct GameButtons: View {
                             ))
                        }
                    }
-                   
-               }
+                }
             }
             .frame(width: 1280, height: 800)
             .fixedSize()
         }
     }
-    
+    func runCommandWith(command: String) {
+        try! Process.run(URL(fileURLWithPath: "/bin/zsh"),
+                         arguments: ["-c", command]) {
+            (task) in
+            guard task.terminationStatus == 0 else {
+                // Failed
+                return
+            }
+
+            if let results = task.standardOutput as? String {
+                if let percentage = Int.getIntFromString(from: results) {
+                    print(percentage)
+                }
+                // print(results)
+            }
+        }
+    }
     func runCommand(command: String) {
         DispatchQueue.global().async {
             let task = Process()
