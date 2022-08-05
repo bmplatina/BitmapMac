@@ -135,3 +135,16 @@ struct GrowingImageButton: ButtonStyle {
             .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
     }
 } // https://www.hackingwithswift.com/quick-start/swiftui/customizing-button-with-buttonstyle
+
+struct YouTubeView: NSViewRepresentable {
+    let id: String
+    
+    func makeNSView(context: Context) -> WKWebView {
+        return WKWebView()
+    }
+    
+    func updateNSView(_ nsView: WKWebView, context: Context) {
+        guard let youtubeURL = URL(string: "https://www.youtube.com/embed/\(id)") else { return }
+        nsView.load(URLRequest(url: youtubeURL))
+    }
+} // https://www.youtube.com/watch?v=CX-BdDHW0Ho

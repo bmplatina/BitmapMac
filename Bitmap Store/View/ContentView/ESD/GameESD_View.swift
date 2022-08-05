@@ -163,8 +163,8 @@ struct GameButtons: View {
             VStack(alignment: .leading) {
                 HStack {
                     Button(action: { showingPopover = false }) {
-//                        Image(systemName: "x.circle")
-//                            .font(.title2)
+                        //                        Image(systemName: "x.circle")
+                        //                            .font(.title2)
                         Circle()
                             .fill(Color(hex: "ff5f57"))
                             .frame(width:12.5)
@@ -189,223 +189,230 @@ struct GameButtons: View {
                     Spacer()
                 }
                 .padding()
-// MARK: Sheets for Detail View and Installation Wizard
+                // MARK: Sheets for Detail View and Installation Wizard
                 VStack(alignment: .leading) {
-                   HStack {
-                       ZStack {
-                           Rectangle()
-                               .opacity(0)
-                               .frame(width: 256, height: 256)
-                               .padding()
-                           URLImage(URL(string: gameInfos.gameImageURL)!) { image in
-                               image
-                                   .resizable()
-                                   .scaledToFit()
-                                   .frame(width: 256)
-                                   .cornerRadius(24)
-                                   .shadow(radius: 4)
-                                   .padding()
-                           }
-                       }
-                       Divider()
-                       VStack(alignment: .leading) {
-                           HStack {
-                               Text(gameInfos.gameTitle)
-                                   .font(Font.largeTitle)
-                                   .bold()
-                               if gameInfos.isEarlyAccess {
-                                   Text("EARLY ACCESS".localized())
-                                       .padding(.top, 7)
-                               }
-                           }.padding(.leading)
-                           HStack {
-                               if gameInfos.gamePlatformWindows {
-                                   Image("platformWindows")
-                                       .resizable()
-                                       .scaledToFit()
-                                       .frame(height: 25)
-                                       .foregroundColor(.white)
-                               }
-                               if gameInfos.gamePlatformMac {
-                                   Image("platformApple")
-                                       .resizable()
-                                       .scaledToFit()
-                                       .frame(height: 25)
-                               }
-                               if gameInfos.gamePlatformMobile {
-                                   Image("platformAndroid")
-                                       .resizable()
-                                       .scaledToFit()
-                                       .frame(height: 25)
-                                       .foregroundColor(.white)
-                                   Image("platformIOS")
-                                       .renderingMode(.template)
-                                       .resizable()
-                                       .scaledToFit()
-                                       .frame(height: 25)
-                                       .foregroundColor(Color.init(hex: "0078d4"))
-                               }
-                           }.padding([.leading, .bottom])
-                           Text("Released on".localized() + ": \(gameInfos.gameReleasedDate)")
-                               .padding(.leading)
-                           Text("Genre".localized() + ": \(gameInfos.gameGenre)")
-                               .padding(.leading)
-                           Text("Developer".localized() + ": \(gameInfos.gameDeveloper)")
-                               .padding(.leading)
-                           Text("Publisher".localized() + ": \(gameInfos.gamePublisher)")
-                               .padding(.leading)
-                           Link("Visit game website".localized(), destination: URL(string: gameInfos.gameWebsite)!)
-                               .padding(.leading)
-                           Divider()
-                               .padding()
-                           ScrollView {
-                               VStack(alignment: .leading) {
-                                   Text("Instruction Video".localized())
-                                       .font(Font.largeTitle)
-                                       .bold()
-                                       .padding()
-                                   Divider()
-                                       .padding(.horizontal)
-                                   YouTubePlayerView("https://www.youtube.com/watch?v=WSLxwXMwIog")
-                                       .frame(width:200)
-                                       .padding()
-                               }.padding()
-                                .background(Rectangle().fill(colorScheme == .dark ? Color.init(hex: "404040") : Color.init(hex: "dedede")))
-                                .cornerRadius(16)
-                                .shadow(radius: 4)
-                               
-                               VStack(alignment: .leading) {
-                                   Text(gameInfos.gameHeadline)
-                                       .font(Font.largeTitle)
-                                       .bold()
-                                       .padding()
-                                   Divider()
-                                       .padding(.horizontal)
-                                   Text(gameInfos.gameDescription)
-                                       .padding()
-                               }.padding()
-                                .background(Rectangle().fill(colorScheme == .dark ? Color.init(hex: "404040") : Color.init(hex: "dedede")))
-                                .cornerRadius(16)
-                                .shadow(radius: 4)
-                               VStack(alignment: .leading) {
-                                   Text("Requirements".localized())
-                                       .font(Font.largeTitle)
-                                       .bold()
-                                       .padding()
-                                   Divider()
-                                       .padding(.horizontal)
-                                   HStack {
-                                       if gameInfos.gamePlatformMac {
-                                           Text("Mac\nOS: macOS High Sierra 10.13+\nCPU: AMD64 architecture with SSE2 instruction set support, Apple Silicon\nGPU: Metal-capable Intel and AMD GPUs, Apple Silicon")
-                                               .padding()
-                                       }
-                                       if gameInfos.gamePlatformMac && gameInfos.gamePlatformWindows {
-                                           Divider()
-                                               .padding()
-                                       }
-                                       if gameInfos.gamePlatformWindows {
-                                           Text("Windows\nOS: Windows 7 (SP1+) and Windows 10, 64-bit versions only.\nCPU: AMD64 architecture with SSE2 instruction set support\nGPU: DX10, DX11, and DX12-capable GPUs")
-                                               .padding()
-                                       }
-                                   }
-                               }.padding()
-                                .background(Rectangle().fill(colorScheme == .dark ? Color.init(hex: "404040") : Color.init(hex: "dedede")))
-                                .cornerRadius(16)
-                                .shadow(radius: 4)
-                           }.padding(.horizontal)
-                       }
-                   }
-                   
-                   Spacer()
+                    HStack {
+                        ZStack {
+                            Rectangle()
+                                .opacity(0)
+                                .frame(width: 256, height: 256)
+                                .padding()
+                            URLImage(URL(string: gameInfos.gameImageURL)!) { image in
+                                image
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 256)
+                                    .cornerRadius(24)
+                                    .shadow(radius: 4)
+                                    .padding()
+                            }
+                        }
+                        Divider()
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Text(gameInfos.gameTitle)
+                                    .font(Font.largeTitle)
+                                    .bold()
+                                if gameInfos.isEarlyAccess {
+                                    Text("EARLY ACCESS".localized())
+                                        .padding(.top, 7)
+                                }
+                            }.padding(.leading)
+                            HStack {
+                                if gameInfos.gamePlatformWindows {
+                                    Image("platformWindows")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(height: 25)
+                                        .foregroundColor(.white)
+                                }
+                                if gameInfos.gamePlatformMac {
+                                    Image("platformApple")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(height: 25)
+                                }
+                                if gameInfos.gamePlatformMobile {
+                                    Image("platformAndroid")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(height: 25)
+                                        .foregroundColor(.white)
+                                    Image("platformIOS")
+                                        .renderingMode(.template)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(height: 25)
+                                        .foregroundColor(Color.init(hex: "0078d4"))
+                                }
+                            }.padding([.leading, .bottom])
+                            Text("Released on".localized() + ": \(gameInfos.gameReleasedDate)")
+                                .padding(.leading)
+                            Text("Genre".localized() + ": \(gameInfos.gameGenre)")
+                                .padding(.leading)
+                            Text("Developer".localized() + ": \(gameInfos.gameDeveloper)")
+                                .padding(.leading)
+                            Text("Publisher".localized() + ": \(gameInfos.gamePublisher)")
+                                .padding(.leading)
+                            Link("Visit game website".localized(), destination: URL(string: gameInfos.gameWebsite)!)
+                                .padding(.leading)
+                            Divider()
+                                .padding()
+                            ScrollView {
+                                VStack(alignment: .leading) {
+                                    Text("Preview".localized())
+                                        .font(Font.largeTitle)
+                                        .bold()
+                                        .padding()
+                                    Divider()
+                                        .padding(.horizontal)
+                                }.padding()
+                                    .background(Rectangle().fill(colorScheme == .dark ? Color.init(hex: "404040") : Color.init(hex: "dedede")))
+                                    .cornerRadius(16)
+                                    .shadow(radius: 4)
+                                
+                                VStack(alignment: .leading) {
+                                    Text(gameInfos.gameHeadline)
+                                        .font(Font.largeTitle)
+                                        .bold()
+                                        .padding()
+                                    Divider()
+                                        .padding(.horizontal)
+                                    Text(gameInfos.gameDescription)
+                                        .padding()
+                                }.padding()
+                                    .background(Rectangle().fill(colorScheme == .dark ? Color.init(hex: "404040") : Color.init(hex: "dedede")))
+                                    .cornerRadius(16)
+                                    .shadow(radius: 4)
+                                VStack(alignment: .leading) {
+                                    Text("Requirements".localized())
+                                        .font(Font.largeTitle)
+                                        .bold()
+                                        .padding()
+                                    Divider()
+                                        .padding(.horizontal)
+                                    HStack {
+                                        if gameInfos.gamePlatformMac {
+                                            Text("Mac\nOS: macOS High Sierra 10.13+\nCPU: AMD64 architecture with SSE2 instruction set support, Apple Silicon\nGPU: Metal-capable Intel and AMD GPUs, Apple Silicon")
+                                                .padding()
+                                        }
+                                        if gameInfos.gamePlatformMac && gameInfos.gamePlatformWindows {
+                                            Divider()
+                                                .padding()
+                                        }
+                                        if gameInfos.gamePlatformWindows {
+                                            Text("Windows\nOS: Windows 7 (SP1+) and Windows 10, 64-bit versions only.\nCPU: AMD64 architecture with SSE2 instruction set support\nGPU: DX10, DX11, and DX12-capable GPUs")
+                                                .padding()
+                                        }
+                                    }
+                                }.padding()
+                                    .background(Rectangle().fill(colorScheme == .dark ? Color.init(hex: "404040") : Color.init(hex: "dedede")))
+                                    .cornerRadius(16)
+                                    .shadow(radius: 4)
+                            }.padding(.horizontal)
+                        }
+                    }
                     
-                   if gameInfos.gamePlatformMac || forceMacSupport {
-                       switch isInstalling {
-                       case true:
-                           HStack {
-                               Button(action: {
-                                   if gameInfos.gamePlatformMac {
-                                       runAppByPath(appPath: "\"\(bitmapGameFolder)/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).app\"")
-                                   }
-                                   else {
-                                       runCommand(command: "open \"\(bitmapGameFolder)/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).exe\"")
-                                   }
-                               }) {
-                                   Text(forceMacSupport ? "Open".localized() : "Play".localized())
-                                       .font(.title3)
-                               }
-                               .padding()
-                               .buttonStyle(GrowingButton())
-                               Button(action: { uninstallAlert = true }) {
-                                   Text("Uninstall".localized())
-                                       .font(.title3)
-                               }
-                               .alert(isPresented: $uninstallAlert) {
-                                   Alert(
-                                    title: Text(gameInfos.gameTitle + " will be removed from your computer".localized()),
-                                    message: Text(gameInfos.gameTitle + " will be deleted from your system. It cannot be undone.".localized()),
-                                    primaryButton: .destructive(
-                                        Text("Delete".localized()), action: {
-                                            runCommand(command: "rm -rvf \"\(bitmapGameFolder)/\(gameInfos.gameBinaryName)/\"")
-                                    }),
-                                    secondaryButton: .default(
+                    Spacer()
+                    
+                    if gameInfos.gamePlatformMac || forceMacSupport {
+                        switch isInstalling {
+                        case true:
+                            HStack {
+                                if !showProgressBar {
+                                    Button(action: {
+                                        if gameInfos.gamePlatformMac {
+                                            runAppByPath(appPath: "\"\(bitmapGameFolder)/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).app\"")
+                                        }
+                                        else {
+                                            runCommand(command: "open \"\(bitmapGameFolder)/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).exe\"")
+                                        }
+                                    }) {
+                                        Text(forceMacSupport ? "Open".localized() : "Play".localized())
+                                            .font(.title3)
+                                    }
+                                    .padding()
+                                    .buttonStyle(GrowingButton())
+                                    Button(action: { uninstallAlert = true }) {
+                                        Text("Uninstall".localized())
+                                            .font(.title3)
+                                    }
+                                    .alert(isPresented: $uninstallAlert) {
+                                        Alert(
+                                            title: Text(gameInfos.gameTitle + " will be removed from your computer".localized()),
+                                            message: Text(gameInfos.gameTitle + " will be deleted from your system. It cannot be undone.".localized()),
+                                            primaryButton: .destructive(
+                                                Text("Delete".localized()), action: {
+                                                    runCommand(command: "rm -rvf \"\(bitmapGameFolder)/\(gameInfos.gameBinaryName)/\"")
+                                                    isInstalling = false
+                                                }),
+                                            secondaryButton: .default(
+                                                Text("Cancel".localized())
+                                            ))
+                                    }
+                                    .padding()
+                                    .buttonStyle(GrowingButton())
+                                }
+                                
+                                else {
+                                    Group {
+                                        Text("Processing...".localized())
+                                            .padding()
+                                            .font(.title3)
+                                            .background(Capsule().fill(Color.blue))
+                                    }.padding()
+                                    ProgressView(showUnzipProgress ? "Writing to Disk".localized()  + ": \(progressBarPercentage)" : "Downloading".localized() + ": \(progressBarPercentage)", value: progressBarValue, total: CGFloat(1.0))
+                                        .progressViewStyle(LinearProgressViewStyle())
+                                        .padding()
+                                }
+                            }
+                        case false:
+                            Button(action: { installAlert = true }) {
+                                Text("Install".localized())
+                                    .font(.title3)
+                            }
+                            .alert(isPresented: $installAlert) {
+                                Alert(title: Text(gameInfos.gameTitle + " will be installed".localized()), message: Text("Installation Path".localized() + ": \(bitmapGameFolder)"),
+                                      primaryButton: .destructive(
+                                        Text("Install".localized()), action: {
+                                            do {
+                                                try FileManager.default.createDirectory(atPath: "\(bitmapGameFolder)/\(gameInfos.gameBinaryName)/", withIntermediateDirectories: true, attributes: nil)
+                                            } catch {
+                                                print(error)
+                                            }
+                                            downloadGame()
+                                            showProgressBar = true
+                                            isInstalling = true
+                                        }),
+                                      secondaryButton: .default(
                                         Text("Cancel".localized())
-                                    ))
-                               }
-                               .padding()
-                               .buttonStyle(GrowingButton())
-                               if showProgressBar {
-                                   ProgressView(showUnzipProgress ? "Writing to Disk".localized() : "Downloading".localized() + ": \(progressBarPercentage)", value: progressBarValue, total: CGFloat(1.0))
-                                       .progressViewStyle(LinearProgressViewStyle())
-                                       .padding()
-                               }
-                           }
-                       case false:
-                           Button(action: { installAlert = true }) {
-                               Text("Install".localized())
-                                   .font(.title3)
-                           }
-                           .alert(isPresented: $installAlert) {
-                               Alert(title: Text(gameInfos.gameTitle + " will be installed".localized()), message: Text("Installation Path".localized() + ": \(bitmapGameFolder)"),
-                                     primaryButton: .destructive(
-                                         Text("Install".localized()), action: {
-                                             do {
-                                                 try FileManager.default.createDirectory(atPath: "\(bitmapGameFolder)/\(gameInfos.gameBinaryName)/", withIntermediateDirectories: true, attributes: nil)
-                                             } catch {
-                                                 print(error)
-                                             }
-                                             downloadGame(url: gameInfos.gameDownloadMacURL, gameName: gameInfos.gameBinaryName)
-                                             showProgressBar = true
-                                             isInstalling = true
-                                     }),
-                                     secondaryButton: .default(
-                                         Text("Cancel".localized())
-                                     ))
-                           }
-                           .padding()
-                           .buttonStyle(GrowingButton())
-                       }
-                   }
-                   else {
-                       Button(action: {
-                           showUnsupportedPlatformAlert = true
-                       }, label: {
-                           Text("Unsupported Platform".localized())
-                       })
-                       .padding()
-                       .buttonStyle(GrowingButton())
-                       .alert(isPresented: $showUnsupportedPlatformAlert) {
-                           Alert(
-                            title: Text("Unsupported Platform".localized()),
-                            message: Text(gameInfos.gameTitle + " is not playable for Mac. But in case, if you are using Apple Silicon Mac for iOS support, or have emulator installed for Windows and Android support, you may play this game. Do you want to install anyway?".localized()),
-                            primaryButton: .default(
-                                Text("Confirm".localized()), action: {
-                                    forceMacSupport = true
-                            }),
-                            secondaryButton: .default(
-                                Text("Cancel".localized())
-                            ))
-                       }
-                   }
+                                      ))
+                            }
+                            .padding()
+                            .buttonStyle(GrowingButton())
+                        }
+                    }
+                    else {
+                        Button(action: {
+                            showUnsupportedPlatformAlert = true
+                        }, label: {
+                            Text("Unsupported Platform".localized())
+                        })
+                        .padding()
+                        .buttonStyle(GrowingButton())
+                        .alert(isPresented: $showUnsupportedPlatformAlert) {
+                            Alert(
+                                title: Text("Unsupported Platform".localized()),
+                                message: Text(gameInfos.gameTitle + " is not playable for Mac. But in case, if you are using Apple Silicon Mac for iOS support, or have emulator installed for Windows and Android support, you may play this game. Do you want to install anyway?".localized()),
+                                primaryButton: .default(
+                                    Text("Confirm".localized()), action: {
+                                        forceMacSupport = true
+                                    }),
+                                secondaryButton: .default(
+                                    Text("Cancel".localized())
+                                ))
+                        }
+                    }
                 }
             }
             .frame(width: 1280, height: 800)
@@ -442,20 +449,20 @@ struct GameButtons: View {
                                            completionHandler: nil)
     }
     
-    func downloadGame(url: String, gameName: String) {
+    func downloadGame() {
         self.showUnzipProgress = false
         // 파일매니저
         let fileManager = FileManager.default
         // 앱 경로
         let appURL = fileManager.urls(for: .userDirectory, in: .localDomainMask)[0]
         // 파일 경로 생성
-        let fileURL = appURL.appendingPathComponent("Shared/Bitmap Production/Games/\(gameName)/\(gameName).zip")
+        let fileURL = appURL.appendingPathComponent("Shared/Bitmap Production/Games/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).zip")
         // 파일 경로 지정 및 다운로드 옵션 설정 ( 이전 파일 삭제 , 디렉토리 생성 )
         let destination: DownloadRequest.Destination = { _, _ in
             return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
         }
         // 다운로드 시작
-        AF.download(url, method: .get, parameters: nil, encoding: JSONEncoding.default, to: destination).downloadProgress { (progress) in
+        AF.download(gameInfos.gameDownloadMacURL, method: .get, parameters: nil, encoding: JSONEncoding.default, to: destination).downloadProgress { (progress) in
             // 이 부분에서 프로그레스 수정
             self.progressBarValue = CGFloat(progress.fractionCompleted)
             self.progressBarPercentage = "\(Int(progress.fractionCompleted * 100))%"
@@ -463,30 +470,35 @@ struct GameButtons: View {
         }
         .response { response in
             if response.error != nil {
-                print("Download Failed")
+                print("Download Failed. Check your internet connection.")
+                self.showProgressBar = false
             }
             else {
-                print("\(gameName) has been Downloaded")
-                unzipGame(gameName: gameName)
+                print("\(gameInfos.gameTitle) id downloaded to your computer.")
+                unzipGame()
             }
         }
     }   // https://gonslab.tistory.com/14
-    func unzipGame(gameName: String) {
+    func unzipGame() {
         do {
             self.showUnzipProgress = true
-            let gameDirectory = FileManager.default.urls(for:.userDirectory, in: .localDomainMask)[0]
-            let zipPath = gameDirectory.appendingPathComponent("Shared/Bitmap Production/Games/\(gameName)/\(gameName).zip")
-            let destinationDirectory = gameDirectory.appendingPathComponent("Shared/Bitmap Production/Games/\(gameName)/")
-            try Zip.unzipFile(zipPath, destination: destinationDirectory, overwrite: true, password: "", progress: { (progress) -> () in
+            let fileManager = FileManager.default
+            let gameDirectory = fileManager.urls(for: .userDirectory, in: .localDomainMask)[0]
+            let zipPath = gameDirectory.appendingPathComponent("Shared/Bitmap Production/Games/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).zip")
+            // let zipPathURL = URL(fileURLWithPath: bitmapGameFolder + "/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).zip")
+            let destinationDirectory = gameDirectory.appendingPathComponent("Shared/Bitmap Production/Games/\(gameInfos.gameBinaryName)/")
+            try Zip.unzipFile(zipPath, destination: destinationDirectory, overwrite: true, password: gameInfos.gameBinaryName, progress: { (progress) -> () in
                 self.progressBarValue = CGFloat(progress)
                 print("Unzipping: \(progress)")
             }) // Unzip
             self.showUnzipProgress = false
             self.showProgressBar = false
-
+            
         }
         catch {
-            print("Something went wrong")
+            print("Decompressing of \(gameInfos.gameTitle) failed. Check \(bitmapGameFolder)/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).zip and decompress it manually. Error code: \(error)")
+            self.showUnzipProgress = false
+            self.showProgressBar = false
         }
     }
 }
