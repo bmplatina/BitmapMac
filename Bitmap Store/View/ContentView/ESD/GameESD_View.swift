@@ -429,6 +429,7 @@ struct GameButtons: View {
             task.waitUntilExit()
         }
     } // https://seorenn.github.io/note/swift-howto-run-shell-command.html
+    
     func runAppByBundleIdentifier(identifier: String) {
         guard let url = NSWorkspace.shared.urlForApplication(withBundleIdentifier: identifier) else { return }
         let path = "/bin"
@@ -475,19 +476,21 @@ struct GameButtons: View {
             }
             else {
                 print("\(gameInfos.gameTitle) id downloaded to your computer.")
-                unzipGame()
+                unzipGame(zipPathURL: fileURL)
             }
         }
     }   // https://gonslab.tistory.com/14
-    func unzipGame() {
+    
+    func unzipGame(zipPathURL: URL) {
         do {
             self.showUnzipProgress = true
             let fileManager = FileManager.default
             let gameDirectory = fileManager.urls(for: .userDirectory, in: .localDomainMask)[0]
             let zipPath = gameDirectory.appendingPathComponent("Shared/Bitmap Production/Games/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).zip")
-            // let zipPathURL = URL(fileURLWithPath: bitmapGameFolder + "/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).zip")
+            // let zipPathURL1 = URL(fileURLWithPath: bitmapGameFolder + "/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).zip")
+            let zipPathURL2 = URL(string: "file:///Users/Shared/Bitmap%20Production/Games/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).zip")!
             let destinationDirectory = gameDirectory.appendingPathComponent("Shared/Bitmap Production/Games/\(gameInfos.gameBinaryName)/")
-            try Zip.unzipFile(zipPath, destination: destinationDirectory, overwrite: true, password: gameInfos.gameBinaryName, progress: { (progress) -> () in
+            try Zip.unzipFile(zipPathURL2, destination: destinationDirectory, overwrite: true, password: gameInfos.gameBinaryName, progress: { (progress) -> () in
                 self.progressBarValue = CGFloat(progress)
                 print("Unzipping: \(progress)")
             }) // Unzip
