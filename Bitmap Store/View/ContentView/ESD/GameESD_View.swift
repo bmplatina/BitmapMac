@@ -475,7 +475,7 @@ struct GameButtons: View {
                 self.showProgressBar = false
             }
             else {
-                print("\(gameInfos.gameTitle) id downloaded to your computer.")
+                print("\(gameInfos.gameTitle) is downloaded to your computer.")
                 unzipGame(zipPathURL: fileURL)
             }
         }
