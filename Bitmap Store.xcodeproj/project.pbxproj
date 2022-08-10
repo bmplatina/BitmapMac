@@ -16,7 +16,6 @@
 		7511E246287EF3B0004563DF /* Bitmap_StoreUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7511E245287EF3B0004563DF /* Bitmap_StoreUITestsLaunchTests.swift */; };
 		7511E254287EFAAD004563DF /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7511E253287EFAAD004563DF /* WebKit.framework */; };
 		7511E257287F0202004563DF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7511E259287F0202004563DF /* Localizable.strings */; };
-		75177958289B1A8F00681A30 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 75177957289B1A8F00681A30 /* Zip */; };
 		7521D29D288730B100335F41 /* OtherESD_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7521D29C288730B100335F41 /* OtherESD_View.swift */; };
 		752D8F6B288F036F007C69A1 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 752D8F6A288F036F007C69A1 /* URLImage */; };
 		752D8F6D288F036F007C69A1 /* URLImageStore in Frameworks */ = {isa = PBXBuildFile; productRef = 752D8F6C288F036F007C69A1 /* URLImageStore */; };
@@ -24,6 +23,7 @@
 		752D8F71288F038C007C69A1 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 752D8F70288F038C007C69A1 /* Alamofire */; };
 		752F09362888B040008C1889 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752F09352888B040008C1889 /* Extensions.swift */; };
 		7545C0712888A54200A1596C /* FetchGameInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7545C0702888A54200A1596C /* FetchGameInformation.swift */; };
+		754A974D28A27DD7008E8277 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 754A974C28A27DD7008E8277 /* ZIPFoundation */; };
 		755D0C6A2885A9AD00CCBCF5 /* GameESD_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755D0C692885A9AD00CCBCF5 /* GameESD_View.swift */; };
 		75EDF223287F1BD500B99748 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EDF222287F1BD500B99748 /* Sidebar.swift */; };
 		75F61A222895F2E300CA5886 /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 75F61A212895F2E300CA5886 /* YouTubePlayerKit */; };
@@ -80,8 +80,8 @@
 				752D8F6D288F036F007C69A1 /* URLImageStore in Frameworks */,
 				752D8F6F288F0389007C69A1 /* SwiftyJSON in Frameworks */,
 				75F61A2A28968C3B00CA5886 /* Files in Frameworks */,
-				75177958289B1A8F00681A30 /* Zip in Frameworks */,
 				7511E254287EFAAD004563DF /* WebKit.framework in Frameworks */,
+				754A974D28A27DD7008E8277 /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,7 +238,7 @@
 				752D8F70288F038C007C69A1 /* Alamofire */,
 				75F61A212895F2E300CA5886 /* YouTubePlayerKit */,
 				75F61A2928968C3B00CA5886 /* Files */,
-				75177957289B1A8F00681A30 /* Zip */,
+				754A974C28A27DD7008E8277 /* ZIPFoundation */,
 			);
 			productName = "Bitmap Store";
 			productReference = 7511E224287EF3AF004563DF /* Bitmap.app */;
@@ -319,7 +319,7 @@
 				752D8F69288F036F007C69A1 /* XCRemoteSwiftPackageReference "url-image" */,
 				75F61A202895F2E300CA5886 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */,
 				75F61A2828968C3B00CA5886 /* XCRemoteSwiftPackageReference "Files" */,
-				75177956289B1A8F00681A30 /* XCRemoteSwiftPackageReference "Zip" */,
+				754A974B28A27DD7008E8277 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 			);
 			productRefGroup = 7511E225287EF3AF004563DF /* Products */;
 			projectDirPath = "";
@@ -541,7 +541,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Bitmap Store/Bitmap_Store.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 64;
 				DEVELOPMENT_ASSET_PATHS = "\"Bitmap Store/Preview Content\"";
 				DEVELOPMENT_TEAM = 6T2Q6AY7MM;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -554,7 +554,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 0.1.3;
+				MARKETING_VERSION = 0.2.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.prodbybitmap.esd;
 				PRODUCT_NAME = Bitmap;
@@ -576,7 +576,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Bitmap Store/Bitmap_Store.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 64;
 				DEVELOPMENT_ASSET_PATHS = "\"Bitmap Store/Preview Content\"";
 				DEVELOPMENT_TEAM = 6T2Q6AY7MM;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -589,7 +589,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 0.1.3;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.prodbybitmap.esd;
 				PRODUCT_NAME = Bitmap;
 				SDKROOT = macosx;
@@ -723,20 +723,20 @@
 				version = 5.6.2;
 			};
 		};
-		75177956289B1A8F00681A30 /* XCRemoteSwiftPackageReference "Zip" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/marmelroy/Zip.git";
-			requirement = {
-				kind = exactVersion;
-				version = 2.1.2;
-			};
-		};
 		752D8F69288F036F007C69A1 /* XCRemoteSwiftPackageReference "url-image" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dmytro-anokhin/url-image";
 			requirement = {
 				kind = exactVersion;
 				version = 3.1.1;
+			};
+		};
+		754A974B28A27DD7008E8277 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weichsel/ZIPFoundation.git";
+			requirement = {
+				kind = exactVersion;
+				version = 0.9.9;
 			};
 		};
 		75E2133B288EA8B80047E3F8 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
@@ -766,11 +766,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		75177957289B1A8F00681A30 /* Zip */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 75177956289B1A8F00681A30 /* XCRemoteSwiftPackageReference "Zip" */;
-			productName = Zip;
-		};
 		752D8F6A288F036F007C69A1 /* URLImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 752D8F69288F036F007C69A1 /* XCRemoteSwiftPackageReference "url-image" */;
@@ -790,6 +785,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 750311C3288EAC9B0095C14B /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		754A974C28A27DD7008E8277 /* ZIPFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 754A974B28A27DD7008E8277 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
 		};
 		75F61A212895F2E300CA5886 /* YouTubePlayerKit */ = {
 			isa = XCSwiftPackageProductDependency;

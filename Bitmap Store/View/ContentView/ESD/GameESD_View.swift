@@ -9,7 +9,7 @@ import SwiftUI
 import URLImage
 import YouTubePlayerKit
 import Alamofire
-import Zip
+import ZIPFoundation
 
 struct GameESD_View: View {
     @State private var searchField: String = ""
@@ -82,13 +82,19 @@ struct GameButtons: View {
     @State private var progressBarValue: CGFloat = 0.0    // Progress bar value
     @State private var progressBarPercentage = "0%"
     @State private var forceMacSupport = false
-    @State private var isInstalling = false
+    @State private var isInstalled = false
     @State private var isUninstalling = false
     
     var gameInfos: gameInfo
     
     init(_ gameInfos: gameInfo) {
         self.gameInfos = gameInfos
+        let fileMgr = FileManager()
+        let users = fileMgr.urls(for: .userDirectory, in: .localDomainMask)[0]
+        // let gameURL = users.appendingPathComponent(gameInfos.gamePlatformMac ? "Shared/Bitmap Production/Games/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).app" : "Shared/Bitmap Production/Games/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).exe")
+        if fileMgr.fileExists(atPath: gameInfos.gamePlatformMac ? "Shared/Bitmap Production/Games/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).app" : "Shared/Bitmap Production/Games/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).exe") {
+            self.isInstalled = true
+        }
     }
     
     var body: some View {
@@ -316,13 +322,12 @@ struct GameButtons: View {
                     Spacer()
                     
                     if gameInfos.gamePlatformMac || forceMacSupport {
-                        switch isInstalling {
-                        case true:
+                        if isInstalled {
                             HStack {
                                 if !showProgressBar {
                                     Button(action: {
                                         if gameInfos.gamePlatformMac {
-                                            runAppByPath(appPath: "\"\(bitmapGameFolder)/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).app\"")
+                                            runAppByPath(appPath: "\(bitmapGameFolder)/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).app")
                                         }
                                         else {
                                             runCommand(command: "open \"\(bitmapGameFolder)/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).exe\"")
@@ -344,7 +349,7 @@ struct GameButtons: View {
                                             primaryButton: .destructive(
                                                 Text("Delete".localized()), action: {
                                                     runCommand(command: "rm -rvf \"\(bitmapGameFolder)/\(gameInfos.gameBinaryName)/\"")
-                                                    isInstalling = false
+                                                    isInstalled = false
                                                 }),
                                             secondaryButton: .default(
                                                 Text("Cancel".localized())
@@ -361,12 +366,14 @@ struct GameButtons: View {
                                             .font(.title3)
                                             .background(Capsule().fill(Color.blue))
                                     }.padding()
-                                    ProgressView(showUnzipProgress ? "Writing to Disk".localized()  + ": \(progressBarPercentage)" : "Downloading".localized() + ": \(progressBarPercentage)", value: progressBarValue, total: CGFloat(1.0))
+                                    ProgressView("Downloading".localized() + ": \(progressBarPercentage)", value: progressBarValue, total: CGFloat(1.0))
                                         .progressViewStyle(LinearProgressViewStyle())
                                         .padding()
                                 }
                             }
-                        case false:
+                        }
+                        
+                        else {
                             Button(action: { installAlert = true }) {
                                 Text("Install".localized())
                                     .font(.title3)
@@ -382,7 +389,7 @@ struct GameButtons: View {
                                             }
                                             downloadGame()
                                             showProgressBar = true
-                                            isInstalling = true
+                                            isInstalled = true
                                         }),
                                       secondaryButton: .default(
                                         Text("Cancel".localized())
@@ -452,22 +459,17 @@ struct GameButtons: View {
     
     func downloadGame() {
         self.showUnzipProgress = false
-        // 파일매니저
         let fileManager = FileManager.default
-        // 앱 경로
         let appURL = fileManager.urls(for: .userDirectory, in: .localDomainMask)[0]
-        // 파일 경로 생성
         let fileURL = appURL.appendingPathComponent("Shared/Bitmap Production/Games/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).zip")
-        // 파일 경로 지정 및 다운로드 옵션 설정 ( 이전 파일 삭제 , 디렉토리 생성 )
         let destination: DownloadRequest.Destination = { _, _ in
             return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
         }
-        // 다운로드 시작
+        
         AF.download(gameInfos.gameDownloadMacURL, method: .get, parameters: nil, encoding: JSONEncoding.default, to: destination).downloadProgress { (progress) in
-            // 이 부분에서 프로그레스 수정
             self.progressBarValue = CGFloat(progress.fractionCompleted)
             self.progressBarPercentage = "\(Int(progress.fractionCompleted * 100))%"
-            print("Downloading: \(progress.fractionCompleted)")
+            print("Downloading \(gameInfos.gameTitle): \(Int(progress.fractionCompleted * 100))%")
         }
         .response { response in
             if response.error != nil {
@@ -476,27 +478,29 @@ struct GameButtons: View {
             }
             else {
                 print("\(gameInfos.gameTitle) is downloaded to your computer.")
-                unzipGame(zipPathURL: fileURL)
+                unzipGame()
+                // self.isInstalled = true
             }
         }
     }   // https://gonslab.tistory.com/14
-    
-    func unzipGame(zipPathURL: URL) {
+
+    func unzipGame() {
         do {
-            self.showUnzipProgress = true
             let fileManager = FileManager.default
             let gameDirectory = fileManager.urls(for: .userDirectory, in: .localDomainMask)[0]
             let zipPath = gameDirectory.appendingPathComponent("Shared/Bitmap Production/Games/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).zip")
-            // let zipPathURL1 = URL(fileURLWithPath: bitmapGameFolder + "/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).zip")
-            let zipPathURL2 = URL(string: "file:///Users/Shared/Bitmap%20Production/Games/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).zip")!
             let destinationDirectory = gameDirectory.appendingPathComponent("Shared/Bitmap Production/Games/\(gameInfos.gameBinaryName)/")
-            try Zip.unzipFile(zipPathURL2, destination: destinationDirectory, overwrite: true, password: gameInfos.gameBinaryName, progress: { (progress) -> () in
-                self.progressBarValue = CGFloat(progress)
-                print("Unzipping: \(progress)")
-            }) // Unzip
-            self.showUnzipProgress = false
+            try fileManager.unzipItem(at: zipPath, to: destinationDirectory)
+//            , progress: { progress -> () in
+//                self.progressBarValue = CGFloat(progress.fractionCompleted)
+//                self.progressBarPercentage = "\(Int(progress.fractionCompleted * 100))%"
+//                print("Writing \(gameInfos.gameTitle) on disk: \(Int(progress.fractionCompleted * 100))%")
+//            }) // Unzip
+//            self.showUnzipProgress = false
+//            self.showProgressBar = false
+            self.isInstalled = true
             self.showProgressBar = false
-            
+            debugPrint("Writing \(gameInfos.gameTitle) on disk done!")
         }
         catch {
             print("Decompressing of \(gameInfos.gameTitle) failed. Check \(bitmapGameFolder)/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).zip and decompress it manually. Error code: \(error)")

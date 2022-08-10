@@ -76,7 +76,7 @@ class gameInfoViewmodel: ObservableObject {
     var subscription = Set<AnyCancellable>()
     @Published var gameInfos = [gameInfo]()
     
-    var url = "http://api.prodbybitmap.com/games/game2.json"
+    var url = "http://api.prodbybitmap.com/games/game.json"
     
     init() {
         // print(#fileID, #function, #line, "")
