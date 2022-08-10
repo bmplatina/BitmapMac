@@ -320,105 +320,114 @@ struct GameButtons: View {
                     }
                     
                     Spacer()
-                    
-                    if gameInfos.gamePlatformMac || forceMacSupport {
-                        if isInstalled {
-                            HStack {
-                                if !showProgressBar {
-                                    Button(action: {
-                                        if gameInfos.gamePlatformMac {
-                                            runAppByPath(appPath: "\(bitmapGameFolder)/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).app")
+                    if gameInfos.isReleased {
+                        if gameInfos.gamePlatformMac || forceMacSupport {
+                            if isInstalled {
+                                HStack {
+                                    if !showProgressBar {
+                                        Button(action: {
+                                            if gameInfos.gamePlatformMac {
+                                                runAppByPath(appPath: "\(bitmapGameFolder)/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).app")
+                                            }
+                                            else {
+                                                runCommand(command: "open \"\(bitmapGameFolder)/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).exe\"")
+                                            }
+                                        }) {
+                                            Text(forceMacSupport ? "Open".localized() : "Play".localized())
+                                                .font(.title3)
                                         }
-                                        else {
-                                            runCommand(command: "open \"\(bitmapGameFolder)/\(gameInfos.gameBinaryName)/\(gameInfos.gameBinaryName).exe\"")
-                                        }
-                                    }) {
-                                        Text(forceMacSupport ? "Open".localized() : "Play".localized())
-                                            .font(.title3)
-                                    }
-                                    .padding()
-                                    .buttonStyle(GrowingButton())
-                                    Button(action: { uninstallAlert = true }) {
-                                        Text("Uninstall".localized())
-                                            .font(.title3)
-                                    }
-                                    .alert(isPresented: $uninstallAlert) {
-                                        Alert(
-                                            title: Text(gameInfos.gameTitle + " will be removed from your computer".localized()),
-                                            message: Text(gameInfos.gameTitle + " will be deleted from your system. It cannot be undone.".localized()),
-                                            primaryButton: .destructive(
-                                                Text("Delete".localized()), action: {
-                                                    runCommand(command: "rm -rvf \"\(bitmapGameFolder)/\(gameInfos.gameBinaryName)/\"")
-                                                    isInstalled = false
-                                                }),
-                                            secondaryButton: .default(
-                                                Text("Cancel".localized())
-                                            ))
-                                    }
-                                    .padding()
-                                    .buttonStyle(GrowingButton())
-                                }
-                                
-                                else {
-                                    Group {
-                                        Text("Processing...".localized())
-                                            .padding()
-                                            .font(.title3)
-                                            .background(Capsule().fill(Color.blue))
-                                    }.padding()
-                                    ProgressView("Downloading".localized() + ": \(progressBarPercentage)", value: progressBarValue, total: CGFloat(1.0))
-                                        .progressViewStyle(LinearProgressViewStyle())
                                         .padding()
+                                        .buttonStyle(GrowingButton())
+                                        Button(action: { uninstallAlert = true }) {
+                                            Text("Uninstall".localized())
+                                                .font(.title3)
+                                        }
+                                        .alert(isPresented: $uninstallAlert) {
+                                            Alert(
+                                                title: Text(gameInfos.gameTitle + " will be removed from your computer".localized()),
+                                                message: Text(gameInfos.gameTitle + " will be deleted from your system. It cannot be undone.".localized()),
+                                                primaryButton: .destructive(
+                                                    Text("Delete".localized()), action: {
+                                                        runCommand(command: "rm -rvf \"\(bitmapGameFolder)/\(gameInfos.gameBinaryName)/\"")
+                                                        isInstalled = false
+                                                    }),
+                                                secondaryButton: .default(
+                                                    Text("Cancel".localized())
+                                                ))
+                                        }
+                                        .padding()
+                                        .buttonStyle(GrowingButton())
+                                    }
+                                    
+                                    else {
+                                        Group {
+                                            Text("Processing...".localized())
+                                                .padding()
+                                                .font(.title3)
+                                                .background(Capsule().fill(Color.blue))
+                                        }.padding()
+                                        ProgressView("Downloading".localized() + ": \(progressBarPercentage)", value: progressBarValue, total: CGFloat(1.0))
+                                            .progressViewStyle(LinearProgressViewStyle())
+                                            .padding()
+                                    }
                                 }
+                            }
+                            
+                            else {
+                                Button(action: { installAlert = true }) {
+                                    Text("Install".localized())
+                                        .font(.title3)
+                                }
+                                .alert(isPresented: $installAlert) {
+                                    Alert(title: Text(gameInfos.gameTitle + " will be installed".localized()), message: Text("Installation Path".localized() + ": \(bitmapGameFolder)"),
+                                          primaryButton: .destructive(
+                                            Text("Install".localized()), action: {
+                                                do {
+                                                    try FileManager.default.createDirectory(atPath: "\(bitmapGameFolder)/\(gameInfos.gameBinaryName)/", withIntermediateDirectories: true, attributes: nil)
+                                                } catch {
+                                                    print(error)
+                                                }
+                                                downloadGame()
+                                                showProgressBar = true
+                                                isInstalled = true
+                                            }),
+                                          secondaryButton: .default(
+                                            Text("Cancel".localized())
+                                          ))
+                                }
+                                .padding()
+                                .buttonStyle(GrowingButton())
                             }
                         }
-                        
                         else {
-                            Button(action: { installAlert = true }) {
-                                Text("Install".localized())
-                                    .font(.title3)
-                            }
-                            .alert(isPresented: $installAlert) {
-                                Alert(title: Text(gameInfos.gameTitle + " will be installed".localized()), message: Text("Installation Path".localized() + ": \(bitmapGameFolder)"),
-                                      primaryButton: .destructive(
-                                        Text("Install".localized()), action: {
-                                            do {
-                                                try FileManager.default.createDirectory(atPath: "\(bitmapGameFolder)/\(gameInfos.gameBinaryName)/", withIntermediateDirectories: true, attributes: nil)
-                                            } catch {
-                                                print(error)
-                                            }
-                                            downloadGame()
-                                            showProgressBar = true
-                                            isInstalled = true
-                                        }),
-                                      secondaryButton: .default(
-                                        Text("Cancel".localized())
-                                      ))
-                            }
+                            Button(action: {
+                                showUnsupportedPlatformAlert = true
+                            }, label: {
+                                Text("Unsupported Platform".localized())
+                            })
                             .padding()
                             .buttonStyle(GrowingButton())
+                            .alert(isPresented: $showUnsupportedPlatformAlert) {
+                                Alert(
+                                    title: Text("Unsupported Platform".localized()),
+                                    message: Text(gameInfos.gameTitle + " is not playable for Mac. But in case, if you are using Apple Silicon Mac for iOS support, or have emulator installed for Windows and Android support, you may play this game. Do you want to install anyway?".localized()),
+                                    primaryButton: .default(
+                                        Text("Confirm".localized()), action: {
+                                            forceMacSupport = true
+                                        }),
+                                    secondaryButton: .default(
+                                        Text("Cancel".localized())
+                                    ))
+                            }
                         }
                     }
                     else {
-                        Button(action: {
-                            showUnsupportedPlatformAlert = true
-                        }, label: {
-                            Text("Unsupported Platform".localized())
-                        })
-                        .padding()
-                        .buttonStyle(GrowingButton())
-                        .alert(isPresented: $showUnsupportedPlatformAlert) {
-                            Alert(
-                                title: Text("Unsupported Platform".localized()),
-                                message: Text(gameInfos.gameTitle + " is not playable for Mac. But in case, if you are using Apple Silicon Mac for iOS support, or have emulator installed for Windows and Android support, you may play this game. Do you want to install anyway?".localized()),
-                                primaryButton: .default(
-                                    Text("Confirm".localized()), action: {
-                                        forceMacSupport = true
-                                    }),
-                                secondaryButton: .default(
-                                    Text("Cancel".localized())
-                                ))
-                        }
+                        Group {
+                            Text("This game is not released.".localized())
+                                .padding()
+                                .font(.title3)
+                                .background(Capsule().fill(Color.blue))
+                        }.padding()
                     }
                 }
             }
