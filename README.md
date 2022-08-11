@@ -13,9 +13,9 @@ You can visit GitHub [Release page](https://github.com/bmplatina/BitmapMac/relea
 
 ##### Build from source
 First, you'll need:
-- Xcode 12 or newer
+- Xcode 13 beta or newer
 - Xcode Commandline Tools
-- macOS devices
+- macOS devices which is running macOS Ventura beta
 
 Second, open terminal and type:
 ```bash
@@ -127,9 +127,9 @@ GitHub [Release 페이지](https://github.com/bmplatina/BitmapMac/releases)에�
 
 ##### 소스 코드에서 빌드
 먼저, 아래 열거된 것들이 필요합니다:
-- Xcode 12 및 이상 버전
+- Xcode 13 베타 및 이상 버전
 - Xcode 명령어 라인 도구
-- macOS 기기
+- macOS Ventura 베타 및 정식 버전 이상 버전을 구동하는 기기
 
 그리고, 터미널을 열어 아래 명령어를 입력하세요:
 ```bash
@@ -228,6 +228,14 @@ struct gameInfo: Codable {
 
 ### 연락처
 - 이재혁 (Platina): ryuplatina@icloud.com
+
+## Package Dependncies: 패키지 의존성
+- Alamofire
+- Files
+- SwiftyJSON
+- URLImgae
+- YouTubePlayerKit
+- ZIPFoundation
 
 ## Got Help
 - https://stackoverflow.com/questions/73123581/swiftui-how-to-parse-json-arrays-from-url-using-alamofire
