@@ -1,6 +1,8 @@
 # Bitmap Application: Team Bitmap Web Application and ESD for macOS
 README supports English and Korean / README 파일은 영어와 한국어를 지원합니다. 한국어 설명은 아래를 참조하세요.
+
 This project is deprecated because due to cross platform support. Please visit [bmplatina/bitmap-electron-app](https://github.com/bmplatina/bitmap-electron-app).
+
 이 프로젝트는 크로스 플랫폼 지원을 위해 폐기되었습니다. [bmplatina/bitmap-electron-app](https://github.com/bmplatina/bitmap-electron-app)을 참조해주세요.
 
 ## English Description
